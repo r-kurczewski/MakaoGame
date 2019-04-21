@@ -1,0 +1,293 @@
+<members>
+  <IDocUnity>
+    <signature>IDocUnity</signature>
+    <childcount>3</childcount>
+    <type>Namespace</type>
+    <name>IDocUnity</name>
+    <token>namespace IDocUnity</token>
+    <scope></scope>
+  </IDocUnity>
+  <IDocUnity.SettingEditor>
+    <signature>IDocUnity.SettingEditor</signature>
+    <childcount>5</childcount>
+    <type>Class</type>
+    <name>SettingEditor</name>
+    <token>public class SettingEditor </token>
+    <scope>IDocUnity</scope>
+    <comments>
+      <summary>Setting class editor</summary>
+    </comments>
+  </IDocUnity.SettingEditor>
+  <IDocUnity.SettingEditor.OnGUI_x0028__x0029_>
+    <signature>IDocUnity.SettingEditor.OnGUI()</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>OnGUI</name>
+    <token>public static void OnGUI()</token>
+    <scope>IDocUnity.SettingEditor</scope>
+    <comments>
+      <summary>Draws thr editor</summary>
+    </comments>
+  </IDocUnity.SettingEditor.OnGUI_x0028__x0029_>
+  <Card>
+    <signature>Card</signature>
+    <childcount>7</childcount>
+    <type>Class</type>
+    <name>Card</name>
+    <token>[ExecuteInEditMode]
+[SelectionBase]
+public abstract class Card : MonoBehaviour </token>
+    <scope></scope>
+  </Card>
+  <Card.Obj>
+    <signature>Card.Obj</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Obj</name>
+    <token>public GameObject Obj { get; set; }</token>
+    <scope>Card</scope>
+  </Card.Obj>
+  <Card.Color>
+    <signature>Card.Color</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Color</name>
+    <token>public CardColor Color { get; set; }</token>
+    <scope>Card</scope>
+  </Card.Color>
+  <Card.Label>
+    <signature>Card.Label</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Label</name>
+    <token>public abstract char Label { get; }</token>
+    <scope>Card</scope>
+  </Card.Label>
+  <Card.Effect_x0028_Game_x0029_>
+    <signature>Card.Effect(Game)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Effect</name>
+    <token>public abstract void Effect(Game game)</token>
+    <scope>Card</scope>
+    <params>
+      <game>Game</game>
+    </params>
+  </Card.Effect_x0028_Game_x0029_>
+  <Card.Create_x003C_T_x003E__x0028_CardColor_x0029_>
+    <signature>Card.Create&lt;T&gt;(CardColor)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Create&lt;T&gt;</name>
+    <token>public static T Create&lt;T&gt;(CardColor color)where T : Card</token>
+    <scope>Card</scope>
+    <params>
+      <color>CardColor</color>
+    </params>
+  </Card.Create_x003C_T_x003E__x0028_CardColor_x0029_>
+  <UnoGame>
+    <signature>UnoGame</signature>
+    <childcount>1</childcount>
+    <type>Namespace</type>
+    <name>UnoGame</name>
+    <token>namespace UnoGame</token>
+    <scope></scope>
+  </UnoGame>
+  <UnoGame.CardColor>
+    <signature>UnoGame.CardColor</signature>
+    <childcount>4</childcount>
+    <type>Enum</type>
+    <name>CardColor</name>
+    <token>public enum CardColor </token>
+    <scope>UnoGame</scope>
+  </UnoGame.CardColor>
+  <UnoGame.CardColor.Heart>
+    <signature>UnoGame.CardColor.Heart</signature>
+    <childcount>0</childcount>
+    <type>EnumValue</type>
+    <name>Heart</name>
+    <token>Heart</token>
+    <scope>UnoGame.CardColor</scope>
+  </UnoGame.CardColor.Heart>
+  <UnoGame.CardColor.Tile>
+    <signature>UnoGame.CardColor.Tile</signature>
+    <childcount>0</childcount>
+    <type>EnumValue</type>
+    <name>Tile</name>
+    <token>Tile</token>
+    <scope>UnoGame.CardColor</scope>
+  </UnoGame.CardColor.Tile>
+  <UnoGame.CardColor.Clover>
+    <signature>UnoGame.CardColor.Clover</signature>
+    <childcount>0</childcount>
+    <type>EnumValue</type>
+    <name>Clover</name>
+    <token>Clover</token>
+    <scope>UnoGame.CardColor</scope>
+  </UnoGame.CardColor.Clover>
+  <UnoGame.CardColor.Pike>
+    <signature>UnoGame.CardColor.Pike</signature>
+    <childcount>0</childcount>
+    <type>EnumValue</type>
+    <name>Pike</name>
+    <token>Pike</token>
+    <scope>UnoGame.CardColor</scope>
+  </UnoGame.CardColor.Pike>
+  <Deck>
+    <signature>Deck</signature>
+    <childcount>3</childcount>
+    <type>Class</type>
+    <name>Deck</name>
+    <token>[SelectionBase]
+public class Deck : MonoBehaviour </token>
+    <scope></scope>
+  </Deck>
+  <Deck.Shuffle_x0028__x0029_>
+    <signature>Deck.Shuffle()</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Shuffle</name>
+    <token>public void Shuffle()</token>
+    <scope>Deck</scope>
+  </Deck.Shuffle_x0028__x0029_>
+  <Game>
+    <signature>Game</signature>
+    <childcount>6</childcount>
+    <type>Class</type>
+    <name>Game</name>
+    <token>public class Game : MonoBehaviour </token>
+    <scope></scope>
+  </Game>
+  <Pile>
+    <signature>Pile</signature>
+    <childcount>2</childcount>
+    <type>Class</type>
+    <name>Pile</name>
+    <token>public class Pile : MonoBehaviour </token>
+    <scope></scope>
+  </Pile>
+  <PlayerHand>
+    <signature>PlayerHand</signature>
+    <childcount>3</childcount>
+    <type>Class</type>
+    <name>PlayerHand</name>
+    <token>public class PlayerHand : MonoBehaviour </token>
+    <scope></scope>
+  </PlayerHand>
+  <PlayerHand.DrawCard_x0028__x0029_>
+    <signature>PlayerHand.DrawCard()</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>DrawCard</name>
+    <token>public void DrawCard()</token>
+    <scope>PlayerHand</scope>
+  </PlayerHand.DrawCard_x0028__x0029_>
+  <Ace>
+    <signature>Ace</signature>
+    <childcount>2</childcount>
+    <type>Class</type>
+    <name>Ace</name>
+    <token>public class Ace : Card </token>
+    <scope></scope>
+  </Ace>
+  <Ace.Label>
+    <signature>Ace.Label</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Label</name>
+    <token>public override char Label { get; }</token>
+    <scope>Ace</scope>
+  </Ace.Label>
+  <Ace.Effect_x0028_Game_x0029_>
+    <signature>Ace.Effect(Game)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Effect</name>
+    <token>public override void Effect(Game game)</token>
+    <scope>Ace</scope>
+    <params>
+      <game>Game</game>
+    </params>
+  </Ace.Effect_x0028_Game_x0029_>
+  <Jack>
+    <signature>Jack</signature>
+    <childcount>2</childcount>
+    <type>Class</type>
+    <name>Jack</name>
+    <token>public class Jack : Card </token>
+    <scope></scope>
+  </Jack>
+  <Jack.Label>
+    <signature>Jack.Label</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Label</name>
+    <token>public override char Label { get; }</token>
+    <scope>Jack</scope>
+  </Jack.Label>
+  <Jack.Effect_x0028_Game_x0029_>
+    <signature>Jack.Effect(Game)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Effect</name>
+    <token>public override void Effect(Game game)</token>
+    <scope>Jack</scope>
+    <params>
+      <game>Game</game>
+    </params>
+  </Jack.Effect_x0028_Game_x0029_>
+  <King>
+    <signature>King</signature>
+    <childcount>2</childcount>
+    <type>Class</type>
+    <name>King</name>
+    <token>public class King : Card </token>
+    <scope></scope>
+  </King>
+  <King.Label>
+    <signature>King.Label</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Label</name>
+    <token>public override char Label { get; }</token>
+    <scope>King</scope>
+  </King.Label>
+  <King.Effect_x0028_Game_x0029_>
+    <signature>King.Effect(Game)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Effect</name>
+    <token>public override void Effect(Game game)</token>
+    <scope>King</scope>
+    <params>
+      <game>Game</game>
+    </params>
+  </King.Effect_x0028_Game_x0029_>
+  <Queen>
+    <signature>Queen</signature>
+    <childcount>2</childcount>
+    <type>Class</type>
+    <name>Queen</name>
+    <token>public class Queen : Card </token>
+    <scope></scope>
+  </Queen>
+  <Queen.Label>
+    <signature>Queen.Label</signature>
+    <childcount>0</childcount>
+    <type>Property</type>
+    <name>Label</name>
+    <token>public override char Label { get; }</token>
+    <scope>Queen</scope>
+  </Queen.Label>
+  <Queen.Effect_x0028_Game_x0029_>
+    <signature>Queen.Effect(Game)</signature>
+    <childcount>0</childcount>
+    <type>Method</type>
+    <name>Effect</name>
+    <token>public override void Effect(Game game)</token>
+    <scope>Queen</scope>
+    <params>
+      <game>Game</game>
+    </params>
+  </Queen.Effect_x0028_Game_x0029_>
+</members>
