@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoGame", "Assembly-CSharp.csproj", "{576A54FA-2A30-2167-9ACD-BACC96C69C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{576A54FA-2A30-2167-9ACD-BACC96C69C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoGame", "Assembly-CSharp-Editor.csproj", "{E260B0CA-483B-2EF9-A6E4-23ADDDD2D701}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{E260B0CA-483B-2EF9-A6E4-23ADDDD2D701}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

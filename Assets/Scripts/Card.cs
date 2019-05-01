@@ -1,11 +1,12 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnoGame;
 
 [ExecuteInEditMode]
 [SelectionBase]
-public abstract class Card : MonoBehaviour
+public abstract class Card : MonoBehaviour, IPointerDownHandler
 {
     public GameObject Obj { get; private set; }
 
@@ -22,7 +23,7 @@ public abstract class Card : MonoBehaviour
         }
     }
     public abstract char Label { get; }
-    public bool hide;
+    public bool hideOnStart;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public abstract class Card : MonoBehaviour
         name = Obj.name = GetType().ToString() + CardColor.ToString();
         Obj.name = "Card";
         Obj.transform.localPosition = Vector3.one;
-        if (hide) Hide();
+        if (hideOnStart) Hide();
         foreach (var label in GetComponentsInChildren<TMP_Text>())
         {
             label.text = Label.ToString();
@@ -67,6 +68,8 @@ public abstract class Card : MonoBehaviour
                 Debug.LogError("Wrong color of card.");
                 break;
         }
+        RectTransform rect = gameObject.AddComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(75, 100);
         TMP_Text label1 = transform.Find("Card/Front/Label1").GetComponent<TMP_Text>();
         TMP_Text label2 = transform.Find("Card/Front/Label2").GetComponent<TMP_Text>();
         TMP_Text symbol = transform.Find("Card/Front/Symbol").GetComponent<TMP_Text>();
@@ -77,12 +80,6 @@ public abstract class Card : MonoBehaviour
         {
             label.color = color;
         }
-        if (!GetComponent<RectTransform>())
-        {
-            var transform = gameObject.AddComponent<RectTransform>();
-            transform.sizeDelta = new Vector2(75, 100);
-            transform.anchoredPosition = new Vector2(0, 0);
-        };
     }
 
     public abstract void Effect(Game context);
@@ -90,13 +87,15 @@ public abstract class Card : MonoBehaviour
     public void Play(Game context)
     {
         //Play a card
+        context.Pile.PutCard(this);
         Effect(context);
         //Finish playing the card
+        Debug.Log("Card played");
     }
 
     public static T Create<T>(CardColor color) where T : Card
     {
-        T card = new GameObject("Card", typeof(RectTransform)).AddComponent<T>();
+        T card = new GameObject().AddComponent<T>();
         card.CardColor = color;
         return card;
     }
@@ -111,6 +110,19 @@ public abstract class Card : MonoBehaviour
         transform.Find("Card/Back").GetComponent<Image>().enabled = false;
     }
 
+    private float maxTime = 0.5f;
+    private float lastTimeClicked;
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        float deltaTime = Time.time - lastTimeClicked;
+
+        if (deltaTime < maxTime)
+        {
+            Play(Game.context);
+        }
+        lastTimeClicked = Time.time;
+    }
 }
 
 namespace UnoGame

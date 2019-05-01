@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
     {
         card.transform.SetParent(cardFolder, false);
         card.transform.localScale = Vector3.one;
-        if (isComputer) card.hide = true;
+        if (isComputer) card.hideOnStart = true;
+        Debug.Log("Dodanie karty");
         cards.Add(card);
     }
 

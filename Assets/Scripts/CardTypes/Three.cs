@@ -14,6 +14,6 @@ public class Three : Card
 
     public override void Effect(Game context)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

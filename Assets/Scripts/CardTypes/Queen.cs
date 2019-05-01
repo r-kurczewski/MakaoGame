@@ -14,6 +14,6 @@ public class Queen : Card
 
     public override void Effect(Game game)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

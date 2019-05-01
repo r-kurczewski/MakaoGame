@@ -14,6 +14,6 @@ public class Jack : Card
 
     public override void Effect(Game game)
     {
-        throw new System.NotImplementedException();
+        
     }
 }
