@@ -16,14 +16,25 @@ public class Pile : MonoBehaviour
             cards.Add(card);
             card.transform.SetParent(transform, false);
             card.transform.localPosition = Vector3.zero;
-            Debug.Log("OK");
+            card.Obj.transform.localPosition = Vector3.zero;
+            card.Show();
+            Debug.Log($"{Game.context.CurrentPlayer.name} plays {card.GetType().ToString()} {card.CardColor}.");
+            Game.context.EndPlayerTurn();
+            Game.context.CurrentPlayer.ApplyCardEffect(new List<Card>() {card });
             return true;
         }
         else
         {
-            Debug.Log("Wrong card");
+            Debug.LogWarning("Wrong card");
             return false;
         }
+    }
+
+    public List<Card> ClearPile()
+    {
+        var pileCards = cards.Take(cards.Count - 1).ToList();
+        cards.RemoveAll(card => pileCards.Contains(card));
+        return pileCards;
     }
 
     void Start()

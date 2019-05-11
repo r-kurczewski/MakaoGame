@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Queen : Card
 {
-    public override char Label
+    public override char Label => 'Q';
+
+    public override void Effect()
     {
-        get
-        {
-            return 'Q';
-        }
+
     }
 
-    public override void Effect(Game game)
+    public override bool IsCounter(Card card)
     {
-        
+        return false;
     }
 }

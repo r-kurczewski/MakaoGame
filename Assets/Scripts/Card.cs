@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnoGame;
-
-[ExecuteInEditMode]
+using System;
 [SelectionBase]
 public abstract class Card : MonoBehaviour, IPointerDownHandler
 {
@@ -23,7 +22,7 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
         }
     }
     public abstract char Label { get; }
-    public bool hideOnStart;
+    private bool hideOnStart;
 
     void Start()
     {
@@ -63,7 +62,7 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
                 break;
 
             default:
-                color = UnityEngine.Color.black;
+                color = Color.black;
                 symbolChar = ' ';
                 Debug.LogError("Wrong color of card.");
                 break;
@@ -82,15 +81,14 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public abstract void Effect(Game context);
+    public abstract void Effect();
 
-    public void Play(Game context)
+    public abstract bool IsCounter(Card card);
+
+    public void Play(bool useEffect = false)
     {
-        //Play a card
-        context.Pile.PutCard(this);
-        Effect(context);
-        //Finish playing the card
-        Debug.Log("Card played");
+        Game.context.Pile.PutCard(this);
+        if(useEffect) Effect();
     }
 
     public static T Create<T>(CardColor color) where T : Card
@@ -102,7 +100,14 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
 
     public void Hide()
     {
-        transform.Find("Card/Back").GetComponent<Image>().enabled = true;
+        try
+        {
+            transform.Find("Card/Back").GetComponent<Image>().enabled = true;
+    }
+        catch (NullReferenceException ex)
+        {
+            hideOnStart = true;
+        }
     }
 
     public void Show()
@@ -110,18 +115,22 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
         transform.Find("Card/Back").GetComponent<Image>().enabled = false;
     }
 
-    private float maxTime = 0.5f;
+    private readonly float maxTime = 0.5f;
     private float lastTimeClicked;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        float deltaTime = Time.time - lastTimeClicked;
-
-        if (deltaTime < maxTime)
+        Game context = Game.context;
+        if(context.CurrentPlayer == context.HumanPlayer && context.HumanPlayer == GetComponentInParent<Player>())
         {
-            Play(Game.context);
-        }
-        lastTimeClicked = Time.time;
+            float deltaTime = Time.time - lastTimeClicked;
+
+            if (deltaTime < maxTime)
+            {
+                Play();
+            }
+            lastTimeClicked = Time.time;
+        }   
     }
 }
 

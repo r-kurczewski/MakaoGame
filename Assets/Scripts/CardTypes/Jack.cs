@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Jack : Card
 {
-    public override char Label
+    public override char Label => 'J';
+
+    public override void Effect()
     {
-        get
-        {
-            return 'J';
-        }
+
     }
 
-    public override void Effect(Game game)
+    public override bool IsCounter(Card card)
     {
-        
+        return card.GetType() == GetType();
     }
 }

@@ -13,8 +13,13 @@ public class Ace : Card
         }
     }
 
-    public override void Effect(Game game)
+    public override void Effect()
     {
-        
+
+    }
+
+    public override bool IsCounter(Card card)
+    {
+        return false;
     }
 }

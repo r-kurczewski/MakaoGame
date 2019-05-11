@@ -13,7 +13,6 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     [SerializeField] private TMP_Text cardCounter;
 
     [SerializeField] private List<Card> cards = new List<Card>();
-    //public int DeckSize { get { return cards.Count; } }
 
     void Start()
     {
@@ -34,10 +33,21 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void AddCardsFromPile(Pile pile)
+    public void AddCard(Card card)
     {
-        Create();
-        Shuffle();
+        card.transform.SetParent(transform.Find("Cards"));
+        card.name = "Card";
+        card.gameObject.SetActive(false);
+    }
+
+    public void AddCardsFromPile()
+    {
+        foreach (var card in Game.context.Pile.ClearPile())
+        {
+            card.transform.rotation = Quaternion.identity;
+            AddCard(card);
+            cards.Add(card);
+        }
     }
 
     public void Create()
@@ -47,6 +57,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
             {
                 cards.Add(Card.Create<Two>(color));
                 cards.Add(Card.Create<Three>(color));
+                cards.Add(Card.Create<Four>(color));
                 cards.Add(Card.Create<Ace>(color));
                 cards.Add(Card.Create<Jack>(color));
                 cards.Add(Card.Create<Queen>(color));
@@ -55,15 +66,13 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         }
         foreach (var card in cards)
         {
-            card.transform.SetParent(transform.Find("Cards"));
-            card.name = "Card";
-            card.gameObject.SetActive(false);
+            AddCard(card);
         }
     }
 
     public Card DrawCard()
     {
-        if (cards.Count == 0) AddCardsFromPile(Game.context.Pile);
+        if (cards.Count == 0) AddCardsFromPile();
         Card card = cards.Last();
         cards.Remove(card);
         cardCounter.text = cards.Count.ToString();
@@ -74,7 +83,12 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Game.context.CurrentPlayer == Game.context.HumanPlayer)
+        {
             Game.context.HumanPlayer.GiveCard(DrawCard());
+            Debug.Log($"{Game.context.HumanPlayer.name} drew a card.");
+            Game.context.EndPlayerTurn();
+        }
+
         else Debug.LogWarning("Now is not a player turn!");
     }
 }
