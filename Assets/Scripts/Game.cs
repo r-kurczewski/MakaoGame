@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnoGame;
+using MakaoGame;
 
 public class Game : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Player[] _players;
     [SerializeField] private Deck _deck;
     [SerializeField] private Pile _pile;
+    [SerializeField] private TMP_Text CurrentTurnLabel;
 
     public Player[] Players
     {
@@ -48,7 +50,7 @@ public class Game : MonoBehaviour
             _pile = value;
         }
     }
-    public Player HumanPlayer { get { return Players.FirstOrDefault(p => p.IsComputer == false); } }
+    public Player HumanPlayer { get { return Players.FirstOrDefault(p => p.GetType() == typeof(HumanPlayer)); } }
     public Player PreviousPlayer { get { return !clockwise ? Players[(CurrentPlayerId + 1) % 4] : Players[(4 + CurrentPlayerId - 1) % 4]; } }
     public Player CurrentPlayer { get { return Players[CurrentPlayerId]; } }
     public Player NextPlayer { get { return clockwise ? Players[(CurrentPlayerId + 1) % 4] : Players[(4 + CurrentPlayerId - 1) % 4]; } }
@@ -70,20 +72,43 @@ public class Game : MonoBehaviour
                 Card card = Deck.DrawCard();
                 player.GiveCard(card);
             }
+            // Debug
+            player.GiveCard(Card.Create<Two>(CardColor.Heart));
         }
-
-
     }
 
     public void EndPlayerTurn()
     {
         CurrentPlayerId++;
+        UpdateTurnLabel();
         StartCoroutine("IEndTurn");
     }
 
-    IEnumerator IEndTurn()
+    public void PassAction(List<Card> action)
     {
-        yield return new WaitForSeconds(2);
-        if (CurrentPlayer.IsComputer) CurrentPlayer.MakeAMove();
+        CurrentPlayerId++;
+        UpdateTurnLabel();
+        Debug.Log($"{CurrentPlayer.name} pass action to {NextPlayer.name}");
+        StartCoroutine("IPassAction", action);
     }
+
+    private IEnumerator IPassAction(List<Card> action)
+    {
+        if (CurrentPlayer != HumanPlayer)
+            yield return new WaitForSeconds(2);
+        CurrentPlayer.ApplyAction(action);
+    }
+
+    private IEnumerator IEndTurn()
+    {
+        if (CurrentPlayer != HumanPlayer)
+            yield return new WaitForSeconds(2);
+        CurrentPlayer.MakeAMove();
+    }
+
+    private void UpdateTurnLabel()
+    {
+        CurrentTurnLabel.text = CurrentPlayerId.ToString();
+    }
+
 }

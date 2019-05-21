@@ -2,33 +2,28 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnoGame;
+using MakaoGame;
 using System;
+using System.Collections.Generic;
+
 [SelectionBase]
 public abstract class Card : MonoBehaviour, IPointerDownHandler
 {
     public GameObject Obj { get; private set; }
 
-    [SerializeField] private CardColor _cardColor;
-    public CardColor CardColor
-    {
-        get
-        {
-            return _cardColor;
-        }
-        set
-        {
-            _cardColor = value;
-        }
-    }
+    [SerializeField] protected CardColor _cardColor;
+    public CardColor CardColor { get => _cardColor; private set => _cardColor = value; }
+    [SerializeField] protected bool _hasEffect;
+    public abstract bool HasEffect { get; }
+
     public abstract char Label { get; }
+
     private bool hideOnStart;
 
     void Start()
     {
         foreach (Transform child in transform) DestroyImmediate(child.gameObject);
         Obj = Instantiate(Resources.Load<GameObject>("Prefabs/Card"), transform);
-        name = Obj.name = GetType().ToString() + CardColor.ToString();
         Obj.name = "Card";
         Obj.transform.localPosition = Vector3.one;
         if (hideOnStart) Hide();
@@ -85,26 +80,22 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
 
     public abstract bool IsCounter(Card card);
 
-    public void Play(bool useEffect = false)
-    {
-        Game.context.Pile.PutCard(this);
-        if(useEffect) Effect();
-    }
-
     public static T Create<T>(CardColor color) where T : Card
     {
         T card = new GameObject().AddComponent<T>();
         card.CardColor = color;
+        card.name = $"{card.GetType().ToString()} {card.CardColor.ToString()}";
         return card;
     }
 
+    
     public void Hide()
     {
         try
         {
             transform.Find("Card/Back").GetComponent<Image>().enabled = true;
-    }
-        catch (NullReferenceException ex)
+        }
+        catch (NullReferenceException)
         {
             hideOnStart = true;
         }
@@ -115,26 +106,29 @@ public abstract class Card : MonoBehaviour, IPointerDownHandler
         transform.Find("Card/Back").GetComponent<Image>().enabled = false;
     }
 
+    public abstract void Reset();
+
     private readonly float maxTime = 0.5f;
     private float lastTimeClicked;
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Game context = Game.context;
-        if(context.CurrentPlayer == context.HumanPlayer && context.HumanPlayer == GetComponentInParent<Player>())
+        if (context.CurrentPlayer == context.HumanPlayer && context.HumanPlayer == GetComponentInParent<Player>())
         {
             float deltaTime = Time.time - lastTimeClicked;
 
             if (deltaTime < maxTime)
             {
-                Play();
+                Game.context.HumanPlayer.Play(this);
+
             }
             lastTimeClicked = Time.time;
-        }   
+        }
     }
 }
 
-namespace UnoGame
+namespace MakaoGame
 {
     public enum CardColor { Heart, Tile, Clover, Pike }
 }

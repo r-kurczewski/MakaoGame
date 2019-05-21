@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CurrentTurn
     - Debugging
     - Deck
     - Game
@@ -12,8 +13,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    UnityEditor.TestRunner.dll:
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -24,7 +23,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.RectMask2D
     com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Scenes/GameView.unity:
@@ -63,49 +61,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9324}
     - Class: 114
-      Script: {instanceID: 9364}
+      Script: {instanceID: 9366}
     - Class: 114
-      Script: {instanceID: 9382}
+      Script: {instanceID: 9384}
     - Class: 114
-      Script: {instanceID: 9400}
+      Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9412}
+      Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9418}
-    - Class: 114
-      Script: {instanceID: 9424}
+      Script: {instanceID: 9420}
     - Class: 114
       Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9432}
+      Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9456}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9468}
+      Script: {instanceID: 9458}
     - Class: 114
-      Script: {instanceID: 9520}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9700}
+      Script: {instanceID: 9522}
     - Class: 114
-      Script: {instanceID: 9884}
+      Script: {instanceID: 9702}
     - Class: 114
-      Script: {instanceID: 10022}
+      Script: {instanceID: 9886}
     - Class: 114
-      Script: {instanceID: 10078}
+      Script: {instanceID: 10024}
     - Class: 114
-      Script: {instanceID: 10136}
+      Script: {instanceID: 10080}
     - Class: 114
-      Script: {instanceID: 10316}
+      Script: {instanceID: 10138}
     - Class: 114
-      Script: {instanceID: 10330}
+      Script: {instanceID: 10218}
     - Class: 114
-      Script: {instanceID: 10422}
+      Script: {instanceID: 10320}
     - Class: 114
-      Script: {instanceID: 10478}
+      Script: {instanceID: 10334}
+    - Class: 114
+      Script: {instanceID: 10426}
     - Class: 114
       Script: {instanceID: 10482}
     - Class: 114
-      Script: {instanceID: 10750}
+      Script: {instanceID: 10486}
+    - Class: 114
+      Script: {instanceID: 10754}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -131,28 +131,36 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 20
       Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
     - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9412}
+      Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9418}
-    - Class: 114
-      Script: {instanceID: 9424}
+      Script: {instanceID: 9420}
     - Class: 114
       Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9432}
+      Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9468}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 10478}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 10892}
+      Script: {instanceID: 10320}
+    - Class: 114
+      Script: {instanceID: 10482}
+    - Class: 114
+      Script: {instanceID: 10486}
+    - Class: 114
+      Script: {instanceID: 10896}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -202,6 +210,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.XR.LegacyInputHelpers.dll
     namespaceName: UnityEngine.XR.LegacyInputHelpers
     className: ArmModel
+  - hash:
+      serializedVersion: 2
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Four
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -426,6 +440,18 @@ ScriptsOnlyBuild:
     className: NetworkTransform
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements
+    className: CallbackExecutor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements.Editor
+    className: Placeholder
+  - hash:
+      serializedVersion: 2
       Hash: 12e93f4b5dbef30ecee7469b12c2c443
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -624,7 +650,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: King
@@ -684,7 +710,7 @@ ScriptsOnlyBuild:
     className: AnalyticsTracker
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Two
@@ -726,13 +752,13 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Jack
   - hash:
       serializedVersion: 2
-      Hash: 4d03b097b837eb3bd946df3ffcd8fa8e
+      Hash: 0d798faf557ff1897a0bfc0a5571d6e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game
@@ -774,7 +800,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Queen
@@ -784,6 +810,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: e0766a0e8938b34dbdc572ce4b274d5c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CurrentTurn
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -870,7 +902,7 @@ ScriptsOnlyBuild:
     className: NetworkBehaviour
   - hash:
       serializedVersion: 2
-      Hash: a75199aced49659ed8951f68779e582c
+      Hash: ae7efc015b93d6e915652ef2b703e0a7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -888,7 +920,7 @@ ScriptsOnlyBuild:
     className: DataPrivacyButton
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Three
@@ -900,7 +932,7 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
-      Hash: 99f4075c15236ba949f8e97521984ec9
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ace

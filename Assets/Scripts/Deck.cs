@@ -5,18 +5,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnoGame;
+using MakaoGame;
 
 [SelectionBase]
 public class Deck : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private TMP_Text cardCounter;
+    [SerializeField] private TMP_Text cardNumber = default;
 
     [SerializeField] private List<Card> cards = new List<Card>();
 
     void Start()
     {
-        cardCounter.text = cards.Count.ToString();
+        cardNumber.text = cards.Count.ToString();
     }
 
     public void Shuffle()
@@ -36,7 +36,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     public void AddCard(Card card)
     {
         card.transform.SetParent(transform.Find("Cards"));
-        card.name = "Card";
+        card.transform.rotation = Quaternion.identity;
         card.gameObject.SetActive(false);
     }
 
@@ -44,7 +44,6 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     {
         foreach (var card in Game.context.Pile.ClearPile())
         {
-            card.transform.rotation = Quaternion.identity;
             AddCard(card);
             cards.Add(card);
         }
@@ -55,6 +54,14 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         foreach (CardColor color in Enum.GetValues(typeof(CardColor)))
         {
             {
+                cards.Add(Card.Create<Two>(color));
+                cards.Add(Card.Create<Three>(color));
+                cards.Add(Card.Create<Four>(color));
+                cards.Add(Card.Create<Ace>(color));
+                cards.Add(Card.Create<Jack>(color));
+                cards.Add(Card.Create<Queen>(color));
+                cards.Add(Card.Create<King>(color));
+
                 cards.Add(Card.Create<Two>(color));
                 cards.Add(Card.Create<Three>(color));
                 cards.Add(Card.Create<Four>(color));
@@ -75,7 +82,7 @@ public class Deck : MonoBehaviour, IPointerDownHandler
         if (cards.Count == 0) AddCardsFromPile();
         Card card = cards.Last();
         cards.Remove(card);
-        cardCounter.text = cards.Count.ToString();
+        cardNumber.text = cards.Count.ToString();
         card.gameObject.SetActive(true);
         return card;
     }
@@ -84,8 +91,9 @@ public class Deck : MonoBehaviour, IPointerDownHandler
     {
         if (Game.context.CurrentPlayer == Game.context.HumanPlayer)
         {
-            Game.context.HumanPlayer.GiveCard(DrawCard());
-            Debug.Log($"{Game.context.HumanPlayer.name} drew a card.");
+            var card = DrawCard();
+            Game.context.HumanPlayer.GiveCard(card);
+            Debug.Log($"{Game.context.HumanPlayer.name} draws {card.name}");
             Game.context.EndPlayerTurn();
         }
 

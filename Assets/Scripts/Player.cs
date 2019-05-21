@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[SelectionBase]
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
-    [SerializeField] private Transform cardFolder;
-
-    [SerializeField] private bool _isComputer;
-    [SerializeField] private int _skipTurn;
-    [SerializeField] private List<Card> cards = new List<Card>();
+    [SerializeField] protected int _skipTurn;
+    [SerializeField] protected List<Card> cards = new List<Card>();
+    [SerializeField] protected Transform cardFolder;
     public List<Card> PlayableCards
     {
         get
@@ -22,71 +19,32 @@ public class Player : MonoBehaviour
             return cards.Where(x => x.GetType() == type || x.CardColor == color).ToList();
         }
     }
-    public bool IsComputer { get => _isComputer; private set => _isComputer = value; }
-    public int SkipTurn { get => _skipTurn; private set => _skipTurn = value; }
 
-    public void GiveCard(Card card)
-    {
-        card.transform.SetParent(cardFolder, false);
-        card.transform.localScale = Vector3.one;
-        //if (IsComputer) card.Hide();
-        cards.Add(card);
-    }
+    public int SkipTurn { get => _skipTurn; set => _skipTurn = value; }
+
+    public abstract void GiveCard(Card card);
+
+    public abstract void MakeAMove();
 
     private void SortCards()
     {
 
     }
 
-    private void PlayACard(Card card)
+    public abstract void ApplyAction(List<Card> cards);
+
+    public void Play(Card card)
     {
-        card.Play();
         cards.Remove(card);
+        Game.context.Pile.PutCard(card);
+        Debug.Log($"{this.name} plays {card.name}");
     }
 
-    private void DrawCard()
+    public void Counter(Card card)
     {
-        Card card = Game.context.Deck.DrawCard();
-        Debug.Log($"{this.name} drew a card.");
-        GiveCard(card);
-        Game.context.EndPlayerTurn();
-    }
-
-    public void MakeAMove()
-    {
-        if (IsComputer)
-        {
-            if (PlayableCards.Count > 0)
-            {
-                PlayACard(PlayableCards[Random.Range(0, PlayableCards.Count)]);
-            }
-            else
-            {
-                DrawCard();
-            }
-        }
-        else
-        {
-
-        }
-    }
-
-    public void ApplyCardEffect(List<Card> cards)
-    {
-        Card toCounter = cards.LastOrDefault();
-        if (Game.context.CurrentPlayer.cards.FirstOrDefault(x => toCounter.IsCounter(x)))
-        {
-            // ask if want to counter
-            //Debug.Log("Can counter");
-        }
-        else
-        {
-            foreach (var card in cards)
-            {
-                card.Effect();
-                //Debug.Log("Can't counter");
-            }
-        }
+        cards.Remove(card);
+        Game.context.Pile.PutCounterCard(card);
+        Debug.Log($"{this.name} plays {card.name}");
     }
 
 }
