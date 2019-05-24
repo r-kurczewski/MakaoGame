@@ -1,102 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using MakaoGame;
+using static MakaoGame.Card;
 
-[SelectionBase]
-public class Deck : MonoBehaviour, IPointerDownHandler
+namespace MakaoGame
 {
-    [SerializeField] private TMP_Text cardNumber = default;
-
-    [SerializeField] private List<Card> cards = new List<Card>();
-
-    void Start()
+    [SelectionBase]
+    public class Deck : MonoBehaviour, IPointerDownHandler
     {
-        cardNumber.text = cards.Count.ToString();
-    }
+        [SerializeField] private TMP_Text cardNumber = default;
 
-    public void Shuffle()
-    {
-        System.Random rand = new System.Random();
+        [SerializeField] private List<Card> cards = new List<Card>();
 
-        for (int i = 0; i < cards.Count; i++)
+        void Start()
         {
-            int pos = i + rand.Next(cards.Count - i);
-
-            var temp = cards[pos];
-            cards[pos] = cards[i];
-            cards[i] = temp;
+            cardNumber.text = cards.Count.ToString();
         }
-    }
 
-    public void AddCard(Card card)
-    {
-        card.transform.SetParent(transform.Find("Cards"));
-        card.transform.rotation = Quaternion.identity;
-        card.gameObject.SetActive(false);
-    }
-
-    public void AddCardsFromPile()
-    {
-        foreach (var card in Game.context.Pile.ClearPile())
+        public void Shuffle()
         {
-            AddCard(card);
-            cards.Add(card);
-        }
-    }
-
-    public void Create()
-    {
-        foreach (CardColor color in Enum.GetValues(typeof(CardColor)))
-        {
+            for (int i = 0; i < cards.Count; i++)
             {
-                cards.Add(Card.Create<Two>(color));
-                cards.Add(Card.Create<Three>(color));
-                cards.Add(Card.Create<Four>(color));
-                cards.Add(Card.Create<Ace>(color));
-                cards.Add(Card.Create<Jack>(color));
-                cards.Add(Card.Create<Queen>(color));
-                cards.Add(Card.Create<King>(color));
+                int pos = i + Random.Range(0, cards.Count - i);
 
-                cards.Add(Card.Create<Two>(color));
-                cards.Add(Card.Create<Three>(color));
-                cards.Add(Card.Create<Four>(color));
-                cards.Add(Card.Create<Ace>(color));
-                cards.Add(Card.Create<Jack>(color));
-                cards.Add(Card.Create<Queen>(color));
-                cards.Add(Card.Create<King>(color));
+                var temp = cards[pos];
+                cards[pos] = cards[i];
+                cards[i] = temp;
             }
         }
-        foreach (var card in cards)
-        {
-            AddCard(card);
-        }
-    }
 
-    public Card DrawCard()
-    {
-        if (cards.Count == 0) AddCardsFromPile();
-        Card card = cards.Last();
-        cards.Remove(card);
-        cardNumber.text = cards.Count.ToString();
-        card.gameObject.SetActive(true);
-        return card;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (Game.context.CurrentPlayer == Game.context.HumanPlayer)
+        public void AddCard(Card card)
         {
-            var card = DrawCard();
-            Game.context.HumanPlayer.GiveCard(card);
-            Debug.Log($"{Game.context.HumanPlayer.name} draws {card.name}");
-            Game.context.EndPlayerTurn();
+            card.transform.SetParent(transform.Find("Cards"));
+            card.transform.rotation = Quaternion.identity;
+            card.gameObject.SetActive(false);
         }
 
-        else Debug.LogWarning("Now is not a player turn!");
+        public void AddCardsFromPile()
+        {
+            foreach (var card in Game.context.Pile.ClearPile())
+            {
+                AddCard(card);
+                cards.Add(card);
+            }
+        }
+
+        public void Create()
+        {
+            foreach (CardSuit color in System.Enum.GetValues(typeof(CardSuit)))
+            {
+                {
+                    cards.Add(Create<Two>(color));
+                    cards.Add(Create<Three>(color));
+                    cards.Add(Create<Four>(color));
+                    cards.Add(Create<Ace>(color));
+                    cards.Add(Create<Jack>(color));
+                    cards.Add(Create<Queen>(color));
+                    cards.Add(Create<King>(color));
+
+                    cards.Add(Create<Two>(color));
+                    cards.Add(Create<Three>(color));
+                    cards.Add(Create<Four>(color));
+                    cards.Add(Create<Ace>(color));
+                    cards.Add(Create<Jack>(color));
+                    cards.Add(Create<Queen>(color));
+                    cards.Add(Create<King>(color));
+                }
+            }
+            foreach (var card in cards)
+            {
+                AddCard(card);
+            }
+        }
+
+        public Card DrawCard()
+        {
+            if (cards.Count == 0) AddCardsFromPile();
+            Card card = cards.Last();
+            cards.Remove(card);
+            cardNumber.text = cards.Count.ToString();
+            card.gameObject.SetActive(true);
+            return card;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (Game.context.CurrentPlayer == Game.context.HumanPlayer)
+            {
+                Game.context.HumanPlayer.DrawACard();
+                Game.context.EndPlayerTurn();
+            }
+
+            else Debug.LogWarning("Now is not a player turn!");
+        }
     }
 }

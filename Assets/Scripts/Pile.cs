@@ -3,52 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[SelectionBase]
-public class Pile : MonoBehaviour
+namespace MakaoGame
 {
-    [SerializeField] List<Card> cards = new List<Card>();
-    public List<Card> actionChain;
-
-    public Card TopCard { get { return cards.LastOrDefault(); } }
-
-    private void AddToPile(Card card)
+    [SelectionBase]
+    public class Pile : MonoBehaviour
     {
-        cards.Add(card);
-        card.transform.SetParent(transform, false);
-        card.transform.localPosition = Vector3.zero;
-        card.Obj.transform.localPosition = Vector3.zero;
-        card.Show();
-    }
+        [SerializeField] List<Card> cards = new List<Card>();
+        public List<Card> actionChain;
 
-    public bool PutCard(Card card)
-    {
-        if (TopCard == null || TopCard.GetType() == card.GetType() || TopCard.CardColor == card.CardColor)
+        public Card TopCard { get { return cards.LastOrDefault(); } }
+
+        private void AddToPile(Card card)
         {
-            AddToPile(card);
-            if (card.HasEffect)
+            cards.Add(card);
+            card.transform.SetParent(transform, false);
+            card.transform.localPosition = Vector3.zero;
+            card.Obj.transform.localPosition = Vector3.zero;
+            card.Show();
+        }
+
+        public bool PutCard(Card card)
+        {
+            if (TopCard == null || TopCard.GetType() == card.GetType() || TopCard.CardColor == card.CardColor)
             {
-                Game.context.PassAction(new List<Card> { card });
+                AddToPile(card);
+                if (card.HasEffect)
+                {
+                    Game.context.PassAction(new List<Card> { card });
+                }
+                else
+                    Game.context.EndPlayerTurn();
+                return true;
             }
             else
-                Game.context.EndPlayerTurn();
-            return true;
+            {
+                Debug.LogWarning($"Wrong card: {TopCard.name} on pile, {card.name} to put");
+                return false;
+            }
         }
-        else
+
+        public void PutCounterCard(Card card)
         {
-            Debug.LogWarning($"Wrong card: {TopCard.name} on pile, {card.name} to put");
-            return false;
+            AddToPile(card);
         }
-    }
 
-    public void PutCounterCard(Card card)
-    {
-        AddToPile(card);
-    }
-
-    public List<Card> ClearPile()
-    {
-        var pileCards = cards.Take(cards.Count - 1).ToList();
-        cards.RemoveAll(card => pileCards.Contains(card));
-        return pileCards;
+        public List<Card> ClearPile()
+        {
+            var pileCards = cards.Take(cards.Count - 1).ToList();
+            cards.RemoveAll(card => pileCards.Contains(card));
+            return pileCards;
+        }
     }
 }

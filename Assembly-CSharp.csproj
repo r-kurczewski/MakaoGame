@@ -63,24 +63,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\IDoc\Example\CSClass.cs" />
-    <Compile Include="Assets\Scripts\ActionWindow.cs" />
-    <Compile Include="Assets\Scripts\AIPlayer.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
-    <Compile Include="Assets\Scripts\CardPicker.cs" />
-    <Compile Include="Assets\Scripts\CardPickWindow.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Ace.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Four.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Jack.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\King.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Queen.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Three.cs" />
-    <Compile Include="Assets\Scripts\CardTypes\Two.cs" />
-    <Compile Include="Assets\Scripts\Debugging.cs" />
+    <Compile Include="Assets\Scripts\Cards\Ace.cs" />
+    <Compile Include="Assets\Scripts\Cards\Four.cs" />
+    <Compile Include="Assets\Scripts\Cards\Jack.cs" />
+    <Compile Include="Assets\Scripts\Cards\King.cs" />
+    <Compile Include="Assets\Scripts\Cards\Queen.cs" />
+    <Compile Include="Assets\Scripts\Cards\Three.cs" />
+    <Compile Include="Assets\Scripts\Cards\Two.cs" />
     <Compile Include="Assets\Scripts\Deck.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
-    <Compile Include="Assets\Scripts\HumanPlayer.cs" />
+    <Compile Include="Assets\Scripts\GUI\ActionWindow.cs" />
+    <Compile Include="Assets\Scripts\GUI\CardPicker.cs" />
+    <Compile Include="Assets\Scripts\GUI\CardPickWindow.cs" />
     <Compile Include="Assets\Scripts\Pile.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Players\AIPlayer.cs" />
+    <Compile Include="Assets\Scripts\Players\HumanPlayer.cs" />
+    <Compile Include="Assets\Scripts\Players\Player.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\IDoc\Templates\DefaultTemplate\js\idoc.js.txt" />
