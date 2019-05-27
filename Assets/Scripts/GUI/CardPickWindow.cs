@@ -6,17 +6,8 @@ using UnityEngine.UI;
 
 namespace MakaoGame.GUI
 {
-    public class CardPickWindow : MonoBehaviour
+    public class CardPickWindow : GUIListWindow
     {
-#pragma warning disable 0649
-        [SerializeField] private Button _accept;
-        [SerializeField] private Button _decline;
-        [SerializeField] private GameObject listView;
-        [SerializeField] private CardPicker pick;
-#pragma warning restore 0649
-
-        public Button Accept { get => _accept; private set => _accept = value; }
-        public Button Decline { get => _decline; private set => _decline = value; }
         public CardPicker Pick { get => pick; private set => pick = value; }
 
         public static CardPickWindow Create(List<Card> cards)
@@ -39,11 +30,6 @@ namespace MakaoGame.GUI
             Pick.transform.Find("Select").GetComponent<Image>().enabled = true;
             Accept.interactable = true;
             //Debug.Log($"Picked {selection.name}");
-        }
-
-        public void Close()
-        {
-            Destroy(gameObject);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MakaoGame
 {
@@ -27,13 +28,8 @@ namespace MakaoGame
             {
                 var actionWindow = ActionWindow.Create(action);
 
+                // skontruj kartę
                 actionWindow.Accept.onClick.AddListener(delegate
-                {
-                    AcceptAction(action);
-                    actionWindow.Close();
-                });
-
-                actionWindow.Decline.onClick.AddListener(delegate
                 {
                     var pickWindow = CardPickWindow.Create(cards.Where(c => c.IsCounter(toCounter)).ToList());
                     pickWindow.Accept.onClick.AddListener(delegate
@@ -48,6 +44,14 @@ namespace MakaoGame
                         Game.context.EndPlayerTurn();
                         pickWindow.Close();
                     });
+                    actionWindow.Close();
+                });
+
+                // przyjmij akcję
+                actionWindow.Decline.onClick.AddListener(delegate
+                {
+                    AcceptAction(action);
+                    Game.context.EndPlayerTurn();
                     actionWindow.Close();
                 });
             }
@@ -65,6 +69,16 @@ namespace MakaoGame
                 Wait();
                 Game.context.EndPlayerTurn();
             }
+        }
+
+        public override void Win()
+        {
+            SceneLoader.Load("Win");
+        }
+
+        public override void Lose()
+        {
+            SceneLoader.Load("Lose");
         }
     }
 }

@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 1075446712}
   - component: {fileID: 1075446711}
   m_Layer: 0
-  m_Name: Confrim
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f94f5510c8661146b3f4a346f7ee3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accept: {fileID: 369937466}
-  _decline: {fileID: 1075446711}
+  _accept: {fileID: 1075446711}
+  _decline: {fileID: 369937466}
   listView: {fileID: 632907328}
+  pick: {fileID: 0}

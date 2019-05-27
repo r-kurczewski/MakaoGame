@@ -63,5 +63,15 @@ namespace MakaoGame
                 Game.context.EndPlayerTurn();
             }
         }
+
+        public override void Win()
+        {
+            ActiveTurnIndicator.color = Color.grey;
+        }
+
+        public override void Lose()
+        {
+
+        }
     }
 }

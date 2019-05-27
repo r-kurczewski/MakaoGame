@@ -116,7 +116,9 @@ namespace MakaoGame
         public void OnPointerDown(PointerEventData eventData)
         {
             Game context = Game.context;
-            if (context.CurrentPlayer == context.HumanPlayer && context.HumanPlayer == GetComponentInParent<Player>())
+            if (context.CurrentPlayer == context.HumanPlayer // tura gracza
+                && context.HumanPlayer == GetComponentInParent<Player>() // karta w ręku gracza
+                && context.HumanPlayer.SkipTurn == 0) // gracz nie musi czekać tury
             {
                 float deltaTime = Time.time - lastTimeClicked;
 

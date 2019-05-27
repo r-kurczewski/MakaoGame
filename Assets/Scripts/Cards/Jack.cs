@@ -27,7 +27,7 @@ namespace MakaoGame
 
         public override void Reset()
         {
-
+            Request = null;
         }
     }
 }

@@ -76,10 +76,12 @@
     <Compile Include="Assets\Scripts\GUI\ActionWindow.cs" />
     <Compile Include="Assets\Scripts\GUI\CardPicker.cs" />
     <Compile Include="Assets\Scripts\GUI\CardPickWindow.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIListWindow.cs" />
     <Compile Include="Assets\Scripts\Pile.cs" />
     <Compile Include="Assets\Scripts\Players\AIPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\HumanPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\Player.cs" />
+    <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\IDoc\Templates\DefaultTemplate\js\idoc.js.txt" />
