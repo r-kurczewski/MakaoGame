@@ -6,9 +6,7 @@ namespace MakaoGame
 {
     public class Two : Card
     {
-        public override char Label => '2';
-
-        public override bool HasEffect => true;
+        public override string Label => "2";
 
         public override void Effect()
         {
@@ -17,15 +15,18 @@ namespace MakaoGame
                 context.CurrentPlayer.GiveCard(context.Deck.DrawCard());
         }
 
-        public override bool IsCounter(Card card)
+        public override bool IsCounterTo(Card card)
         {
             var type = card.GetType();
             return type == typeof(Two) || (type == typeof(Three) && CardColor == card.CardColor);
         }
 
-        public override void Reset()
+        public override void Play()
         {
-
+            Game.context.Pile.AddToPile(this);
+            Game.context.Pile.actionChain.Add(this);
+            Game.context.PassAction();
         }
+
     }
 }

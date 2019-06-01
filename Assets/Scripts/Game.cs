@@ -10,13 +10,11 @@ namespace MakaoGame
     public class Game : MonoBehaviour
     {
         public static Game context;
-        [SerializeField] private bool clockwise = true;
         [SerializeField] private int _currentPlayerId = 0;
-        public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = value % 4; } }
+        public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
         [SerializeField] private List<Player> _players;
         [SerializeField] private Deck _deck;
         [SerializeField] private Pile _pile;
-
         public List<Player> Players
         {
             get
@@ -51,8 +49,7 @@ namespace MakaoGame
             }
         }
         public Player HumanPlayer { get { return Players.FirstOrDefault(p => p.GetType() == typeof(HumanPlayer)); } }
-        public Player PreviousPlayer { get { return !clockwise ? Players[(CurrentPlayerId + 1) % 4] : Players[(4 + CurrentPlayerId - 1) % 4]; } }
-        //public Player CurrentPlayer { get { return Players[CurrentPlayerId]; } }
+
         public Player CurrentPlayer
         {
             get
@@ -62,7 +59,24 @@ namespace MakaoGame
                 return Players[CurrentPlayerId];
             }
         }
-        public Player NextPlayer { get { return clockwise ? Players[(CurrentPlayerId + 1) % 4] : Players[(4 + CurrentPlayerId - 1) % 4]; } }
+
+        public void PreviousPlayer()
+        {
+            do
+            {
+                CurrentPlayerId--;
+            }
+            while (Players[CurrentPlayerId] == null);
+        }
+
+        public void NextPlayer()
+        {
+            do
+            {
+                CurrentPlayerId++;
+            }
+            while (Players[CurrentPlayerId] == null);
+        }
 
         void Start()
         {
@@ -82,35 +96,40 @@ namespace MakaoGame
                     player.GiveCard(card);
                 }
                 // Debug
-                //player.GiveCard(Card.Create<Four>(CardSuit.Heart));
+                //player.GiveCard(Card.Create<Ace>(CardSuit.Pike));
             }
-            //HumanPlayer.GiveCard(Card.Create<Four>(CardSuit.Tile));
+            HumanPlayer.GiveCard(Card.Create<King>(CardSuit.Heart));
+            Players[1].GiveCard(Card.Create<King>(CardSuit.Tile));
             UpdateGUILabels();
         }
 
         public void EndPlayerTurn()
         {
             CheckWinningCondition();
-            CurrentPlayerId++;
+            NextPlayer();
             UpdateGUILabels();
             StartCoroutine("IEndTurn");
         }
 
-        public void PassAction(List<Card> action)
+
+        public void PassAction(bool clockwise = true)
         {
             CheckWinningCondition();
-            CurrentPlayerId++;
+            if (clockwise)
+                NextPlayer();
+            else
+                PreviousPlayer();
             UpdateGUILabels();
-            StartCoroutine("IPassAction", action);
+            StartCoroutine("IPassAction");
         }
 
         readonly int delay = 2;
 
-        private IEnumerator IPassAction(List<Card> action)
+        private IEnumerator IPassAction()
         {
             if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
                 yield return new WaitForSeconds(delay);
-            CurrentPlayer.ApplyAction(action);
+            CurrentPlayer.ApplyAction();
         }
 
         private IEnumerator IEndTurn()

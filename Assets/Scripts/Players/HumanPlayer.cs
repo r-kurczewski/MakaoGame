@@ -15,32 +15,32 @@ namespace MakaoGame
             cards.Add(card);
         }
 
-        public override void ApplyAction(List<Card> action)
+        public override void ApplyAction()
         {
             if (SkipTurn > 0)
             {
                 Wait();
-                Game.context.PassAction(action);
+                Game.context.PassAction();
                 return;
             }
+            var action = Game.context.Pile.actionChain;
             Card toCounter = action.LastOrDefault();
-            if (cards.FirstOrDefault(x => toCounter.IsCounter(x)))
+            if (cards.FirstOrDefault(c => c.IsCounterTo(toCounter)))
             {
-                var actionWindow = ActionWindow.Create(action);
+                var actionWindow = ListWindow.Create(action, "Czy chcesz skontrować karty:");
 
                 // skontruj kartę
                 actionWindow.Accept.onClick.AddListener(delegate
                 {
-                    var pickWindow = CardPickWindow.Create(cards.Where(c => c.IsCounter(toCounter)).ToList());
+                    var pickWindow = CardPickWindow.Create(cards.Where(c => c.IsCounterTo(toCounter)).ToList(), "Wybierz kartę którą chcesz rzucić:");
                     pickWindow.Accept.onClick.AddListener(delegate
                     {
                         Counter(pickWindow.Pick.original);
-                        Game.context.PassAction(action);
                         pickWindow.Close();
                     });
                     pickWindow.Decline.onClick.AddListener(delegate
                     {
-                        AcceptAction(action);
+                        AcceptAction();
                         Game.context.EndPlayerTurn();
                         pickWindow.Close();
                     });
@@ -50,14 +50,14 @@ namespace MakaoGame
                 // przyjmij akcję
                 actionWindow.Decline.onClick.AddListener(delegate
                 {
-                    AcceptAction(action);
+                    AcceptAction();
                     Game.context.EndPlayerTurn();
                     actionWindow.Close();
                 });
             }
             else
             {
-                AcceptAction(action);
+                AcceptAction();
                 Game.context.EndPlayerTurn();
             }
         }
@@ -79,6 +79,21 @@ namespace MakaoGame
         public override void Lose()
         {
             SceneLoader.Load("Lose");
+        }
+
+        public override void AceEffect(Ace card)
+        {
+            var  window = AceEffectWindow.Create();
+            window.Accept.onClick.AddListener(delegate
+            {
+                card.ChangeColor(window.Pick.color);
+                Game.context.EndPlayerTurn();
+                window.Close();
+            });
+            window.Decline.onClick.AddListener(delegate
+            {
+                window.Close();
+            });
         }
     }
 }

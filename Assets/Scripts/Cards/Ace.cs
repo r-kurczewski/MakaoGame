@@ -1,27 +1,27 @@
 ﻿using MakaoGame;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MakaoGame
 {
     public class Ace : Card
     {
 
-        public override char Label => 'A';
+        public override string Label => "A";
 
-        public override bool HasEffect => false;
+        [SerializeField] protected CardSuit _virtualColor;
 
-        [SerializeField] private CardSuit _virtualColor;
-
-        public new CardSuit CardColor { get => _virtualColor; set => _virtualColor = value; }
+        public override CardSuit CardColor { get => _virtualColor; protected set => _virtualColor = value; }
 
         public override void Effect()
         {
-
+            Game.context.CurrentPlayer.AceEffect(this);
         }
 
-        public override bool IsCounter(Card card)
+        public override bool IsCounterTo(Card card)
         {
             return false;
         }
@@ -29,6 +29,25 @@ namespace MakaoGame
         public override void Reset()
         {
             _virtualColor = _cardColor;
+            transform.Find("Card/Front/Ace").GetComponentInChildren<Image>().enabled = false;
+        }
+
+        public void ChangeColor(CardSuit cardColor)
+        {
+            Transform acePanel = transform.Find("Card/Front/Ace");
+            var aceSymbol = acePanel.GetComponentInChildren<TMP_Text>();
+            GetSymbolParameters(cardColor, out char symbolstring, out Color color);
+
+            CardColor = cardColor;
+            acePanel.GetComponentInChildren<Image>().enabled = true;
+            aceSymbol.text = symbolstring.ToString();
+            aceSymbol.color = color;
+        }
+
+        public override void Play()
+        {
+            Game.context.Pile.AddToPile(this);
+            Game.context.CurrentPlayer.AceEffect(this);
         }
     }
 }

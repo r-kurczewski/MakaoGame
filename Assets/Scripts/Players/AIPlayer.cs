@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MakaoGame.GUI;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,28 +39,26 @@ namespace MakaoGame
             }
         }
 
-        public override void ApplyAction(List<Card> action)
+        public override void ApplyAction()
         {
             if (SkipTurn > 0)
             {
                 Wait();
-                Game.context.PassAction(action);
+                Game.context.PassAction();
                 return;
             }
-            Card toCounter = action.Last();
+            Card toCounter = Game.context.Pile.actionChain.Last();
             bool wantToCounter = true;
-            if (cards.FirstOrDefault(x => toCounter.IsCounter(x)) != null && wantToCounter)
+            var counters = cards.Where(c => c.IsCounterTo(toCounter)).ToList();
+            if (counters.Count > 0 && wantToCounter)
             {
-                List<Card> counters = cards.Where(c => c.IsCounter(toCounter)).ToList();
                 Card counter = counters[Random.Range(0, counters.Count)];
                 Counter(counter);
-                action.Add(counter);
-                Game.context.PassAction(action);
                 return;
             }
             else
             {
-                AcceptAction(action);
+                AcceptAction();
                 Game.context.EndPlayerTurn();
             }
         }
@@ -72,6 +71,12 @@ namespace MakaoGame
         public override void Lose()
         {
 
+        }
+
+        public override void AceEffect(Ace card)
+        {
+            card.ChangeColor((CardSuit)Random.Range(0, System.Enum.GetValues(typeof(CardSuit)).Length));
+            Game.context.EndPlayerTurn();
         }
     }
 }

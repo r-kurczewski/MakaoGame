@@ -6,23 +6,18 @@ namespace MakaoGame
 {
     public class Queen : Card
     {
-        public override char Label => 'Q';
+        public override string Label => "Q";
 
-        public override bool HasEffect => false;
-
-        public override void Effect()
+        public override void CounterPlay()
         {
-
+            Game.context.Pile.AddToPile(this);
+            Game.context.Pile.actionChain.Clear();
+            Game.context.EndPlayerTurn();
         }
 
-        public override bool IsCounter(Card card)
+        public override bool IsCounterTo(Card card)
         {
-            return false;
-        }
-
-        public override void Reset()
-        {
-
+            return card.CardColor == CardColor;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MakaoGame;
 
 namespace MakaoGame
 {
@@ -40,25 +41,20 @@ namespace MakaoGame
 
         public abstract void MakeAMove();
 
-        private void SortCards()
-        {
-
-        }
-
-        public abstract void ApplyAction(List<Card> action);
+        public abstract void ApplyAction();
 
         public void Play(Card card)
         {
             cards.Remove(card);
-            Game.context.Pile.PutCard(card);
+            card.Play();
             Debug.Log($"{this.name} plays {card.name}");
         }
 
         public void Counter(Card card)
         {
-            cards.Remove(card);
-            Game.context.Pile.PutCounterCard(card);
             Debug.Log($"{this.name} counter {Game.context.Pile.TopCard.name} with {card.name}");
+            card.CounterPlay();
+            cards.Remove(card);
         }
 
         public void Wait()
@@ -67,11 +63,13 @@ namespace MakaoGame
             Debug.Log($"{this.name} must wait a turn. ({SkipTurn + 1}->{SkipTurn})");
         }
 
-        public void AcceptAction(List<Card> action)
+        public void AcceptAction()
         {
-            foreach (var card in action)
+            while (Game.context.Pile.actionChain.Count > 0)
             {
+                var card = Game.context.Pile.actionChain.Last();
                 card.Effect();
+                Game.context.Pile.actionChain.Remove(card);
             }
             Debug.Log($"{this.name} takes an action.");
         }
@@ -100,5 +98,7 @@ namespace MakaoGame
                 WaitTurnLabel.gameObject.SetActive(false);
             }
         }
+
+        public abstract void AceEffect(Ace ace);
     }
 }

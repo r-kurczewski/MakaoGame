@@ -14,11 +14,9 @@ namespace MakaoGame
         public GameObject Obj { get; private set; }
 
         [SerializeField] protected CardSuit _cardColor;
-        public CardSuit CardColor { get => _cardColor; private set => _cardColor = value; }
-        [SerializeField] protected bool _hasEffect;
-        public abstract bool HasEffect { get; }
+        public virtual CardSuit CardColor { get => _cardColor; protected set => _cardColor = value; }
 
-        public abstract char Label { get; }
+        public abstract string Label { get; }
 
         private bool hideOnStart;
 
@@ -29,41 +27,8 @@ namespace MakaoGame
             Obj.name = "Card";
             Obj.transform.localPosition = Vector3.one;
             if (hideOnStart) Hide();
-            foreach (var label in GetComponentsInChildren<TMP_Text>())
-            {
-                label.text = Label.ToString();
-            }
 
-            Color color;
-            char symbolChar;
-            switch (CardColor)
-            {
-                case CardSuit.Heart:
-                    color = Color.red;
-                    symbolChar = '{';
-                    break;
 
-                case CardSuit.Tile:
-                    color = Color.red;
-                    symbolChar = '[';
-                    break;
-
-                case CardSuit.Clover:
-                    color = Color.black;
-                    symbolChar = ']';
-                    break;
-
-                case CardSuit.Pike:
-                    color = Color.black;
-                    symbolChar = '}';
-                    break;
-
-                default:
-                    color = Color.black;
-                    symbolChar = ' ';
-                    Debug.LogError("Wrong color of card.");
-                    break;
-            }
             RectTransform rect = gameObject.AddComponent<RectTransform>();
             rect.sizeDelta = new Vector2(75, 100);
             TMP_Text label1 = transform.Find("Card/Front/Label1").GetComponent<TMP_Text>();
@@ -71,16 +36,33 @@ namespace MakaoGame
             TMP_Text symbol = transform.Find("Card/Front/Symbol").GetComponent<TMP_Text>();
             label1.text = Label.ToString();
             label2.text = Label.ToString();
-            symbol.text = symbolChar.ToString();
+            GetSymbolParameters(CardColor, out char symbolString, out Color color);
+            symbol.text = symbolString.ToString();
             foreach (var label in GetComponentsInChildren<TMP_Text>())
             {
                 label.color = color;
             }
         }
 
-        public abstract void Effect();
+        public virtual void Play()
+        {
+            Game.context.Pile.AddToPile(this);
+            Game.context.EndPlayerTurn();
+        }
 
-        public abstract bool IsCounter(Card card);
+        public virtual void CounterPlay()
+        {
+            Game.context.Pile.AddToPile(this);
+            Game.context.Pile.actionChain.Add(this);
+            Game.context.PassAction();
+        }
+
+        public virtual void Effect()
+        {
+
+        }
+
+        public abstract bool IsCounterTo(Card card);
 
         public static T Create<T>(CardSuit color) where T : Card
         {
@@ -89,7 +71,6 @@ namespace MakaoGame
             card.name = $"{card.GetType().Name} {card.CardColor.ToString()}";
             return card;
         }
-
 
         public void Hide()
         {
@@ -108,7 +89,10 @@ namespace MakaoGame
             transform.Find("Card/Back").GetComponent<Image>().enabled = false;
         }
 
-        public abstract void Reset();
+        public virtual void Reset()
+        {
+
+        }
 
         private readonly float maxTime = 0.5f;
         private float lastTimeClicked;
@@ -116,9 +100,11 @@ namespace MakaoGame
         public void OnPointerDown(PointerEventData eventData)
         {
             Game context = Game.context;
+            var topCard = Game.context.Pile.TopCard;
             if (context.CurrentPlayer == context.HumanPlayer // tura gracza
                 && context.HumanPlayer == GetComponentInParent<Player>() // karta w ręku gracza
-                && context.HumanPlayer.SkipTurn == 0) // gracz nie musi czekać tury
+                && context.HumanPlayer.SkipTurn == 0 // gracz nie musi czekać tury
+                && (topCard == null || topCard.GetType() == GetType() || topCard.CardColor == CardColor)) //karta pasuje do koloru lub figury
             {
                 float deltaTime = Time.time - lastTimeClicked;
 
@@ -128,6 +114,38 @@ namespace MakaoGame
 
                 }
                 lastTimeClicked = Time.time;
+            }
+        }
+
+        public static void GetSymbolParameters(CardSuit cardColor, out char symbolstring, out Color color)
+        {
+            switch (cardColor)
+            {
+                case CardSuit.Heart:
+                    color = Color.red;
+                    symbolstring = '{';
+                    break;
+
+                case CardSuit.Tile:
+                    color = Color.red;
+                    symbolstring = '[';
+                    break;
+
+                case CardSuit.Clover:
+                    color = Color.black;
+                    symbolstring = ']';
+                    break;
+
+                case CardSuit.Pike:
+                    color = Color.black;
+                    symbolstring = '}';
+                    break;
+
+                default:
+                    color = Color.blue;
+                    symbolstring = 'E';
+                    Debug.LogError("Wrong color of card.");
+                    break;
             }
         }
     }

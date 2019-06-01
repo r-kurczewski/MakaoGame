@@ -31,7 +31,7 @@ namespace MakaoGame
             }
         }
 
-        public void AddCard(Card card)
+        public void AddCardImage(Card card)
         {
             card.transform.SetParent(transform.Find("Cards"));
             card.transform.rotation = Quaternion.identity;
@@ -42,7 +42,8 @@ namespace MakaoGame
         {
             foreach (var card in Game.context.Pile.ClearPile())
             {
-                AddCard(card);
+                card.Reset();
+                AddCardImage(card);
                 cards.Add(card);
             }
         }
@@ -55,23 +56,21 @@ namespace MakaoGame
                     cards.Add(Create<Two>(color));
                     cards.Add(Create<Three>(color));
                     cards.Add(Create<Four>(color));
-                    cards.Add(Create<Ace>(color));
+                    cards.Add(Create<Five>(color));
+                    cards.Add(Create<Six>(color));
+                    cards.Add(Create<Seven>(color));
+                    cards.Add(Create<Eight>(color));
+                    cards.Add(Create<Nine>(color));
+                    cards.Add(Create<Ten>(color));
                     cards.Add(Create<Jack>(color));
                     cards.Add(Create<Queen>(color));
                     cards.Add(Create<King>(color));
-
-                    cards.Add(Create<Two>(color));
-                    cards.Add(Create<Three>(color));
-                    cards.Add(Create<Four>(color));
                     cards.Add(Create<Ace>(color));
-                    cards.Add(Create<Jack>(color));
-                    cards.Add(Create<Queen>(color));
-                    cards.Add(Create<King>(color));
                 }
             }
             foreach (var card in cards)
             {
-                AddCard(card);
+                AddCardImage(card);
             }
         }
 

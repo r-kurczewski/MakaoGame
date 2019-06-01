@@ -95,7 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _accept: {fileID: 8430560154371181583}
   _decline: {fileID: 8430560155209139074}
-  listView: {fileID: 8430560156059183608}
+  listView: {fileID: 8430560156059183609}
+  title: {fileID: 8430560154713270238}
   pick: {fileID: 0}
 --- !u!1 &8430560154004014804
 GameObject:
@@ -468,7 +469,7 @@ GameObject:
   - component: {fileID: 8430560154371181568}
   - component: {fileID: 8430560154371181583}
   m_Layer: 0
-  m_Name: Confrim
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

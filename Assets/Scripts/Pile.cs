@@ -13,7 +13,7 @@ namespace MakaoGame
 
         public Card TopCard { get { return cards.LastOrDefault(); } }
 
-        private void AddToPile(Card card)
+        public void AddToPile(Card card)
         {
             cards.Add(card);
             card.transform.SetParent(transform, false);
@@ -22,30 +22,38 @@ namespace MakaoGame
             card.Show();
         }
 
-        public bool PutCard(Card card)
-        {
-            if (TopCard == null || TopCard.GetType() == card.GetType() || TopCard.CardColor == card.CardColor)
-            {
-                AddToPile(card);
-                if (card.HasEffect)
-                {
-                    Game.context.PassAction(new List<Card> { card });
-                }
-                else
-                    Game.context.EndPlayerTurn();
-                return true;
-            }
-            else
-            {
-                Debug.LogWarning($"Wrong card: {TopCard.name} on pile, {card.name} to put");
-                return false;
-            }
-        }
+        //public bool PutCard(Card card, bool checkIfCorrect = true)
+        //{
+        //    if (TopCard == null || TopCard.GetType() == card.GetType() || TopCard.CardColor == card.CardColor)
+        //    {
+        //        AddToPile(card);
+        //        switch (card.EffectType)
+        //        {
+        //            case EffectType.Counterable:
+        //                Game.context.Pile.actionChain.Add(card);
+        //                Game.context.PassAction();
+        //                break;
+        //            case EffectType.Instant:
+        //                card.Effect();
+        //                break;
 
-        public void PutCounterCard(Card card)
-        {
-            AddToPile(card);
-        }
+        //            default:
+        //                Game.context.EndPlayerTurn();
+        //                break;
+        //        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning($"Wrong card: {TopCard.name} on pile, {card.name} to put");
+        //        return false;
+        //    }
+        //}
+
+        //public void PutCounterCard(Card card)
+        //{
+        //    AddToPile(card);
+        //}
 
         public List<Card> ClearPile()
         {

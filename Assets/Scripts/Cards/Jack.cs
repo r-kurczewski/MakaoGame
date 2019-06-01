@@ -8,19 +8,18 @@ namespace MakaoGame
     {
         [SerializeField] private Card _request;
 
-        public override char Label => 'J';
-
-        public override bool HasEffect => false;
+        public override string Label => "J";
 
         public Card Request { get => _request; private set => _request = value; }
 
+        
 
         public override void Effect()
         {
 
         }
 
-        public override bool IsCounter(Card card)
+        public override bool IsCounterTo(Card card)
         {
             return card.GetType() == GetType() || (Request && Request.GetType() == card.GetType());
         }

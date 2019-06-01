@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 namespace MakaoGame.GUI
 {
-    public class CardPickWindow : GUIListWindow
+    public class CardPickWindow : ListWindow
     {
+        [SerializeField] protected CardPicker pick;
         public CardPicker Pick { get => pick; private set => pick = value; }
 
-        public static CardPickWindow Create(List<Card> cards)
+        public static new CardPickWindow Create(List<Card> cards, string title = default)
         {
-            GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/CardPickWindow"), Game.context.transform);
-            var target = obj.GetComponent<CardPickWindow>();
+            var window = Instantiate(Resources.Load<CardPickWindow>("Prefabs/CardPickWindow"), Game.context.transform);
+            window.title.text = title;
             foreach (var card in cards)
             {
-                CardPicker pick = Instantiate(card.Obj, target.listView.transform).AddComponent<CardPicker>();
+                CardPicker pick = Instantiate(card.Obj, window.listView).AddComponent<CardPicker>();
                 pick.original = card;
-                pick.gameObject.AddComponent<Button>();
             }
-            return target;
+            return window;
         }
 
         public void Select(CardPicker selection)
@@ -29,7 +29,6 @@ namespace MakaoGame.GUI
             Pick = selection;
             Pick.transform.Find("Select").GetComponent<Image>().enabled = true;
             Accept.interactable = true;
-            //Debug.Log($"Picked {selection.name}");
         }
     }
 }

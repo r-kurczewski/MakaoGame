@@ -6,23 +6,23 @@ namespace MakaoGame
 {
     public class Four : Card
     {
-        public override char Label => '4';
-
-        public override bool HasEffect => true;
+        public override string Label => "4";
 
         public override void Effect()
         {
             Game.context.CurrentPlayer.SkipTurn++;
         }
 
-        public override bool IsCounter(Card card)
+        public override bool IsCounterTo(Card card)
         {
             return card.GetType() == GetType();
         }
 
-        public override void Reset()
+        public override void Play()
         {
-
+            Game.context.Pile.AddToPile(this);
+            Game.context.Pile.actionChain.Add(this);
+            Game.context.PassAction();
         }
     }
 }
