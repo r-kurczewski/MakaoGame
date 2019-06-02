@@ -13,7 +13,7 @@ namespace MakaoGame
             if (CardColor == CardSuit.Pike)
             {
                 Game.context.Pile.AddToPile(this);
-                Game.context.Pile.actionChain.Add(this);
+                Game.context.actionChain.Add(this);
                 Game.context.PassAction(false);
             }
             else
@@ -29,7 +29,10 @@ namespace MakaoGame
                 case CardSuit.Heart:
                 case CardSuit.Pike:
                     for (int i = 0; i < 5; i++)
+                    {
                         Game.context.CurrentPlayer.GiveCard(Game.context.Deck.DrawCard());
+                        Game.context.actionChain.Remove(this);
+                    }
                     break;
             }
         }
@@ -45,12 +48,12 @@ namespace MakaoGame
             Game.context.Pile.AddToPile(this);
             if (CardColor == CardSuit.Pike)
             {
-                Game.context.Pile.actionChain.Add(this);
+                Game.context.actionChain.Add(this);
                 Game.context.PassAction(false);
             }
             else if (CardColor == CardSuit.Heart)
             {
-                Game.context.Pile.actionChain.Add(this);
+                Game.context.actionChain.Add(this);
                 Game.context.PassAction();
             }
             else

@@ -1,31 +1,151 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - CurrentTurn
-    - Debugging
-    - Deck
-    - Game
-    - Pile
-    - Player
+    - AceEffectWindow
+    - ListWindow
+    - MakaoGame.Deck
+    - MakaoGame.GUI.CardPickWindow
+    - MakaoGame.GUI.JackEffectWindow
+    - MakaoGame.Game
+    - MakaoGame.HumanPlayer
+    - MakaoGame.Pile
+    - MakaoGame.RandomAIPlayer
+    - SceneLoader
+    Unity.TextMeshPro.Editor.dll:
+    - TMPro.EditorUtilities.TMP_SettingsEditor
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TMP_SubMeshUI
     - TMPro.TextMeshProUGUI
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.AspectRatioFitter
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Scenes/GameView.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9404}
+    - Class: 114
+      Script: {instanceID: 9416}
+    - Class: 114
+      Script: {instanceID: 9422}
+    - Class: 114
+      Script: {instanceID: 9428}
+    - Class: 114
+      Script: {instanceID: 9430}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9472}
+    - Class: 114
+      Script: {instanceID: 9526}
+    - Class: 114
+      Script: {instanceID: 10040}
+    - Class: 114
+      Script: {instanceID: 10098}
+    - Class: 114
+      Script: {instanceID: 10342}
+    - Class: 114
+      Script: {instanceID: 10504}
+    - Class: 114
+      Script: {instanceID: 10508}
+    - Class: 114
+      Script: {instanceID: 10956}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Lose.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9414}
+    - Class: 114
+      Script: {instanceID: 9416}
+    - Class: 114
+      Script: {instanceID: 9422}
+    - Class: 114
+      Script: {instanceID: 9428}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9472}
+    - Class: 114
+      Script: {instanceID: 9504}
+    - Class: 114
+      Script: {instanceID: 10342}
+    - Class: 114
+      Script: {instanceID: 10508}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/MainMenu.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -61,51 +181,67 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9324}
     - Class: 114
-      Script: {instanceID: 9366}
+      Script: {instanceID: 9340}
     - Class: 114
-      Script: {instanceID: 9384}
+      Script: {instanceID: 9368}
     - Class: 114
-      Script: {instanceID: 9402}
+      Script: {instanceID: 9386}
     - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9420}
+      Script: {instanceID: 9416}
     - Class: 114
-      Script: {instanceID: 9426}
+      Script: {instanceID: 9418}
+    - Class: 114
+      Script: {instanceID: 9422}
     - Class: 114
       Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9434}
+      Script: {instanceID: 9430}
     - Class: 114
-      Script: {instanceID: 9458}
+      Script: {instanceID: 9436}
     - Class: 114
-      Script: {instanceID: 9470}
+      Script: {instanceID: 9444}
     - Class: 114
-      Script: {instanceID: 9522}
+      Script: {instanceID: 9460}
     - Class: 114
-      Script: {instanceID: 9702}
+      Script: {instanceID: 9462}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9464}
     - Class: 114
-      Script: {instanceID: 10024}
+      Script: {instanceID: 9472}
     - Class: 114
-      Script: {instanceID: 10080}
+      Script: {instanceID: 9484}
     - Class: 114
-      Script: {instanceID: 10138}
+      Script: {instanceID: 9504}
     - Class: 114
-      Script: {instanceID: 10218}
+      Script: {instanceID: 9708}
     - Class: 114
-      Script: {instanceID: 10320}
+      Script: {instanceID: 9748}
     - Class: 114
-      Script: {instanceID: 10334}
+      Script: {instanceID: 9842}
     - Class: 114
-      Script: {instanceID: 10426}
+      Script: {instanceID: 9884}
     - Class: 114
-      Script: {instanceID: 10482}
+      Script: {instanceID: 9896}
     - Class: 114
-      Script: {instanceID: 10486}
+      Script: {instanceID: 9962}
     - Class: 114
-      Script: {instanceID: 10754}
+      Script: {instanceID: 10156}
+    - Class: 114
+      Script: {instanceID: 10342}
+    - Class: 114
+      Script: {instanceID: 10356}
+    - Class: 114
+      Script: {instanceID: 10448}
+    - Class: 114
+      Script: {instanceID: 10504}
+    - Class: 114
+      Script: {instanceID: 10508}
+    - Class: 114
+      Script: {instanceID: 10778}
+    - Class: 114
+      Script: {instanceID: 10956}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -124,7 +260,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    Assets/Scenes/MainMenu.unity:
+    Assets/Scenes/Rules.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -144,23 +280,72 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9420}
+      Script: {instanceID: 9416}
     - Class: 114
-      Script: {instanceID: 9426}
+      Script: {instanceID: 9422}
     - Class: 114
       Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9434}
+      Script: {instanceID: 9436}
     - Class: 114
-      Script: {instanceID: 9470}
+      Script: {instanceID: 9472}
     - Class: 114
-      Script: {instanceID: 10320}
+      Script: {instanceID: 9504}
     - Class: 114
-      Script: {instanceID: 10482}
+      Script: {instanceID: 9748}
     - Class: 114
-      Script: {instanceID: 10486}
+      Script: {instanceID: 10342}
     - Class: 114
-      Script: {instanceID: 10896}
+      Script: {instanceID: 10508}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Win.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9414}
+    - Class: 114
+      Script: {instanceID: 9416}
+    - Class: 114
+      Script: {instanceID: 9422}
+    - Class: 114
+      Script: {instanceID: 9428}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9472}
+    - Class: 114
+      Script: {instanceID: 9504}
+    - Class: 114
+      Script: {instanceID: 10342}
+    - Class: 114
+      Script: {instanceID: 10508}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -214,7 +399,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Four
   - hash:
       serializedVersion: 2
@@ -222,6 +407,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: e758f8772db6345e26d6820dfde148ae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AceEffectWindow
   - hash:
       serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
@@ -434,27 +625,21 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SceneLoader
+  - hash:
+      serializedVersion: 2
       Hash: ad9173d3a69d99153f38ed4b62226129
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
     className: NetworkTransform
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
-  - hash:
-      serializedVersion: 2
-      Hash: 12e93f4b5dbef30ecee7469b12c2c443
+      Hash: 054a675f2f39003b7ded7d1477f4c83b
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Pile
   - hash:
       serializedVersion: 2
@@ -650,9 +835,15 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 082526fdff375ff6fd73c60055c1ae06
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame.GUI
+    className: CardPicker
+  - hash:
+      serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: King
   - hash:
       serializedVersion: 2
@@ -698,6 +889,12 @@ ScriptsOnlyBuild:
     className: TrackedPoseDriver
   - hash:
       serializedVersion: 2
+      Hash: 4dfd2b229b6469975f5adf97f20a4681
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ListWindow
+  - hash:
+      serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
@@ -712,7 +909,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Two
   - hash:
       serializedVersion: 2
@@ -720,6 +917,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ControlPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: bfacab08d9d4be7b01ead5419a4e334c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame.GUI
+    className: JackEffectWindow
   - hash:
       serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
@@ -746,6 +949,24 @@ ScriptsOnlyBuild:
     className: NetworkTransformVisualizer
   - hash:
       serializedVersion: 2
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
+    className: Five
+  - hash:
+      serializedVersion: 2
+      Hash: bfacab08d9d4be7b01ead5419a4e334c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame.GUI
+    className: CardPickWindow
+  - hash:
+      serializedVersion: 2
+      Hash: 33a70b581e35d3d3ef585376762427e6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame.GUI
+    className: ColorPicker
+  - hash:
+      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -754,13 +975,13 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Jack
   - hash:
       serializedVersion: 2
-      Hash: 0d798faf557ff1897a0bfc0a5571d6e5
+      Hash: 465b01a6e82f1c151797f523e8605f08
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Game
   - hash:
       serializedVersion: 2
@@ -770,9 +991,15 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: b100b4716e76b99558eda93e2e18772f
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
+    className: Seven
+  - hash:
+      serializedVersion: 2
+      Hash: bedf228a93c44240761a486b7e462006
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
     className: Deck
   - hash:
       serializedVersion: 2
@@ -802,7 +1029,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Queen
   - hash:
       serializedVersion: 2
@@ -812,10 +1039,10 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: e0766a0e8938b34dbdc572ce4b274d5c
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CurrentTurn
+    namespaceName: MakaoGame
+    className: Eight
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -828,6 +1055,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalReceiver
+  - hash:
+      serializedVersion: 2
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
+    className: Nine
   - hash:
       serializedVersion: 2
       Hash: 4a0369cd366c126cd420018a4ac01f32
@@ -902,10 +1135,10 @@ ScriptsOnlyBuild:
     className: NetworkBehaviour
   - hash:
       serializedVersion: 2
-      Hash: ae7efc015b93d6e915652ef2b703e0a7
+      Hash: a756527e229e3eb9704e4501e0deffbf
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Player
+    namespaceName: MakaoGame
+    className: RandomAIPlayer
   - hash:
       serializedVersion: 2
       Hash: ee0cef6caaac8ae485bfa82f000f0f7b
@@ -922,7 +1155,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: Three
   - hash:
       serializedVersion: 2
@@ -934,7 +1167,13 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
+    className: Six
+  - hash:
+      serializedVersion: 2
+      Hash: fccc2cfbb53d7d836c338c027609edd0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
     className: Ace
   - hash:
       serializedVersion: 2
@@ -968,6 +1207,12 @@ ScriptsOnlyBuild:
     className: NetworkAnimator
   - hash:
       serializedVersion: 2
+      Hash: ded4cb0eb1cd01847cd49bd607be6afb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
+    className: Ten
+  - hash:
+      serializedVersion: 2
       Hash: 5372ed2ce39229b1ac910757999a8be2
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -992,16 +1237,16 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Debugging
-  - hash:
-      serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: a756527e229e3eb9704e4501e0deffbf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame
+    className: HumanPlayer
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -1010,6 +1255,9 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 19
   scenePathNames:
-  - Assets/Scenes/GameView.unity
   - Assets/Scenes/MainMenu.unity
+  - Assets/Scenes/Rules.unity
+  - Assets/Scenes/GameView.unity
+  - Assets/Scenes/Win.unity
+  - Assets/Scenes/Lose.unity
   playerPath: C:/Users/radek/Desktop/UnoGame/UnoGame.exe

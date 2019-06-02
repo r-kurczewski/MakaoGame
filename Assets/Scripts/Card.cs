@@ -25,12 +25,12 @@ namespace MakaoGame
             foreach (Transform child in transform) DestroyImmediate(child.gameObject);
             Obj = Instantiate(Resources.Load<GameObject>("Prefabs/Card"), transform);
             Obj.name = "Card";
-            Obj.transform.localPosition = Vector3.one;
+
+            RectTransform rect = GetComponent<RectTransform>() ? GetComponent<RectTransform>() : gameObject.AddComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(75, 100);
+            Obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
             if (hideOnStart) Hide();
 
-
-            RectTransform rect = gameObject.AddComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(75, 100);
             TMP_Text label1 = transform.Find("Card/Front/Label1").GetComponent<TMP_Text>();
             TMP_Text label2 = transform.Find("Card/Front/Label2").GetComponent<TMP_Text>();
             TMP_Text symbol = transform.Find("Card/Front/Symbol").GetComponent<TMP_Text>();
@@ -53,7 +53,7 @@ namespace MakaoGame
         public virtual void CounterPlay()
         {
             Game.context.Pile.AddToPile(this);
-            Game.context.Pile.actionChain.Add(this);
+            Game.context.actionChain.Add(this);
             Game.context.PassAction();
         }
 
@@ -62,7 +62,10 @@ namespace MakaoGame
 
         }
 
-        public abstract bool IsCounterTo(Card card);
+        public virtual bool IsCounterTo(Card card)
+        {
+            return false;
+        }
 
         public static T Create<T>(CardSuit color) where T : Card
         {

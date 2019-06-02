@@ -11,6 +11,7 @@ namespace MakaoGame
         public override void Effect()
         {
             Game.context.CurrentPlayer.SkipTurn++;
+            Game.context.actionChain.Remove(this);
         }
 
         public override bool IsCounterTo(Card card)
@@ -21,7 +22,7 @@ namespace MakaoGame
         public override void Play()
         {
             Game.context.Pile.AddToPile(this);
-            Game.context.Pile.actionChain.Add(this);
+            Game.context.actionChain.Add(this);
             Game.context.PassAction();
         }
     }

@@ -29,4 +29,14 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Lose");
     }
+
+    public void Rules()
+    {
+        SceneManager.LoadScene("Rules");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

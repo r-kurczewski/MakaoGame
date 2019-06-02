@@ -11,10 +11,11 @@ namespace MakaoGame
     {
         public static Game context;
         [SerializeField] private int _currentPlayerId = 0;
-        public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
-        [SerializeField] private List<Player> _players;
         [SerializeField] private Deck _deck;
         [SerializeField] private Pile _pile;
+        [SerializeField] private List<Player> _players;
+        public List<Card> actionChain = new List<Card>();
+        public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
         public List<Player> Players
         {
             get
@@ -60,7 +61,20 @@ namespace MakaoGame
             }
         }
 
-        public void PreviousPlayer()
+        public Player NextPlayer
+        {
+            get
+            {
+                var i = CurrentPlayerId + 1;
+                while (Players[i] == null)
+                {
+                    i++;
+                }
+                return Players[i];
+            }
+        }
+
+        private void PreviousPlayerTurn()
         {
             do
             {
@@ -69,7 +83,7 @@ namespace MakaoGame
             while (Players[CurrentPlayerId] == null);
         }
 
-        public void NextPlayer()
+        private void NextPlayerTurn()
         {
             do
             {
@@ -90,23 +104,23 @@ namespace MakaoGame
             // Rozdanie kart graczom
             foreach (var player in Players)
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     Card card = Deck.DrawCard();
                     player.GiveCard(card);
                 }
-                // Debug
-                //player.GiveCard(Card.Create<Ace>(CardSuit.Pike));
+                player.GiveCard(Card.Create<Jack>(CardSuit.Pike));
             }
-            HumanPlayer.GiveCard(Card.Create<King>(CardSuit.Heart));
-            Players[1].GiveCard(Card.Create<King>(CardSuit.Tile));
+            //HumanPlayer.GiveCard(Card.Create<Jack>(CardSuit.Heart));
+            HumanPlayer.GiveCard(Card.Create<Jack>(CardSuit.Heart));
+            Players[3].GiveCard(Card.Create<Jack>(CardSuit.Heart));
             UpdateGUILabels();
         }
 
         public void EndPlayerTurn()
         {
             CheckWinningCondition();
-            NextPlayer();
+            NextPlayerTurn();
             UpdateGUILabels();
             StartCoroutine("IEndTurn");
         }
@@ -116,9 +130,9 @@ namespace MakaoGame
         {
             CheckWinningCondition();
             if (clockwise)
-                NextPlayer();
+                NextPlayerTurn();
             else
-                PreviousPlayer();
+                PreviousPlayerTurn();
             UpdateGUILabels();
             StartCoroutine("IPassAction");
         }
@@ -127,14 +141,15 @@ namespace MakaoGame
 
         private IEnumerator IPassAction()
         {
-            if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
+            // opoźnienie tur komputerów
+            //if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
                 yield return new WaitForSeconds(delay);
             CurrentPlayer.ApplyAction();
         }
 
         private IEnumerator IEndTurn()
         {
-            if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
+            //if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
                 yield return new WaitForSeconds(delay);
             CurrentPlayer.MakeAMove();
         }

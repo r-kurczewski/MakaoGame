@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace MakaoGame
 {
@@ -23,11 +22,10 @@ namespace MakaoGame
                 Game.context.PassAction();
                 return;
             }
-            var action = Game.context.Pile.actionChain;
-            Card toCounter = action.LastOrDefault();
+            Card toCounter = Game.context.actionChain.LastOrDefault();
             if (cards.FirstOrDefault(c => c.IsCounterTo(toCounter)))
             {
-                var actionWindow = ListWindow.Create(action, "Czy chcesz skontrować karty:");
+                var actionWindow = ListWindow.Create(Game.context.actionChain, "Czy chcesz skontrować karty:");
 
                 // skontruj kartę
                 actionWindow.Accept.onClick.AddListener(delegate
@@ -41,7 +39,6 @@ namespace MakaoGame
                     pickWindow.Decline.onClick.AddListener(delegate
                     {
                         AcceptAction();
-                        Game.context.EndPlayerTurn();
                         pickWindow.Close();
                     });
                     actionWindow.Close();
@@ -51,14 +48,12 @@ namespace MakaoGame
                 actionWindow.Decline.onClick.AddListener(delegate
                 {
                     AcceptAction();
-                    Game.context.EndPlayerTurn();
                     actionWindow.Close();
                 });
             }
             else
             {
                 AcceptAction();
-                Game.context.EndPlayerTurn();
             }
         }
 
@@ -81,9 +76,9 @@ namespace MakaoGame
             SceneLoader.Load("Lose");
         }
 
-        public override void AceEffect(Ace card)
+        public override void ChooseAceColor(Ace card)
         {
-            var  window = AceEffectWindow.Create();
+            var window = AceEffectWindow.Create();
             window.Accept.onClick.AddListener(delegate
             {
                 card.ChangeColor(window.Pick.color);
@@ -94,6 +89,65 @@ namespace MakaoGame
             {
                 window.Close();
             });
+        }
+
+        public override void ChooseJackRequest(Jack jack)
+        {
+            var window = JackRequestWindow.Create();
+            window.Accept.onClick.AddListener(delegate
+            {
+                jack.Request = window.Pick.original.GetType();
+                Game.context.Pile.AddToPile(jack);
+                Game.context.actionChain.Add(jack);
+                Game.context.PassAction(false);
+                window.Close();
+            });
+            window.Decline.onClick.AddListener(delegate
+            {
+                Game.context.EndPlayerTurn();
+                window.Close();
+            });
+        }
+
+        public override void JackEffect(Jack jack)
+        {
+            List<Card> toPlay = cards.Where(c => c.GetType() == jack.Request).ToList();
+
+            if (toPlay.Count > 0)
+            {
+                var window = JackEffectWindow.Create(cards.Where(c => jack.Request == c.GetType()).ToList());
+                window.Accept.onClick.AddListener(delegate
+                {
+                    Game.context.Pile.AddToPile(window.Pick.original);
+                    cards.Remove(window.Pick.original);
+                    PassJack(jack);
+                    window.Close();
+                });
+                window.Decline.onClick.AddListener(delegate
+                {
+                    DrawACard();
+                    PassJack(jack);
+                    window.Close();
+                });
+            }
+            else
+            {
+                DrawACard();
+                PassJack(jack);
+            }
+        }
+
+        private void PassJack(Jack jack)
+        {
+            if (jack.ThrowingPlayer == this)
+            {
+                Game.context.actionChain.Clear();
+                Game.context.EndPlayerTurn();
+            }
+            else
+            {
+                Game.context.PassAction(false);
+            }
         }
     }
 }

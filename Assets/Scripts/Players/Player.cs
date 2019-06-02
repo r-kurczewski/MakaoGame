@@ -52,7 +52,7 @@ namespace MakaoGame
 
         public void Counter(Card card)
         {
-            Debug.Log($"{this.name} counter {Game.context.Pile.TopCard.name} with {card.name}");
+            Debug.Log($"{this.name} counter {Game.context.actionChain.Last().name} with {card.name}");
             card.CounterPlay();
             cards.Remove(card);
         }
@@ -63,15 +63,16 @@ namespace MakaoGame
             Debug.Log($"{this.name} must wait a turn. ({SkipTurn + 1}->{SkipTurn})");
         }
 
-        public void AcceptAction()
+        public void AcceptAction(bool endTurn = true)
         {
-            while (Game.context.Pile.actionChain.Count > 0)
+            // Wywołuje każdy efekt od najnowszego
+            for (int i = Game.context.actionChain.Count - 1; i >= 0; i--)
             {
-                var card = Game.context.Pile.actionChain.Last();
+                var card = Game.context.actionChain.Last();
                 card.Effect();
-                Game.context.Pile.actionChain.Remove(card);
             }
-            Debug.Log($"{this.name} takes an action.");
+            if (endTurn) Game.context.EndPlayerTurn();
+            //Debug.Log($"{this.name} takes an action.");
         }
 
         public void DrawACard()
@@ -99,6 +100,10 @@ namespace MakaoGame
             }
         }
 
-        public abstract void AceEffect(Ace ace);
+        public abstract void ChooseAceColor(Ace ace);
+
+        public abstract void ChooseJackRequest(Jack jack);
+
+        public abstract void JackEffect(Jack jack);
     }
 }

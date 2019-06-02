@@ -83,11 +83,13 @@
     <Compile Include="Assets\Scripts\GUI\CardPicker.cs" />
     <Compile Include="Assets\Scripts\GUI\CardPickWindow.cs" />
     <Compile Include="Assets\Scripts\GUI\ColorPicker.cs" />
+    <Compile Include="Assets\Scripts\GUI\JackEffectWindow.cs" />
+    <Compile Include="Assets\Scripts\GUI\JackRequestWindow.cs" />
     <Compile Include="Assets\Scripts\GUI\ListWindow.cs" />
     <Compile Include="Assets\Scripts\Pile.cs" />
-    <Compile Include="Assets\Scripts\Players\AIPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\HumanPlayer.cs" />
     <Compile Include="Assets\Scripts\Players\Player.cs" />
+    <Compile Include="Assets\Scripts\Players\RandomAIPlayer.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

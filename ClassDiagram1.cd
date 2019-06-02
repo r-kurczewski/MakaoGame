@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MakaoGame.Ace" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAECgABgAAAAAAAAAAAAAAAAEAgAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Ace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Eight" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Eight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Five" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Five.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Four" Collapsed="true">
+    <Position X="17.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Four.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Jack" Collapsed="true">
+    <Position X="22" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgABAAAQAAAgAAAAAAAgAEAgAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Jack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.King" Collapsed="true">
+    <Position X="26.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAEAgAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\King.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Nine" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Nine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Queen" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Queen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Seven" Collapsed="true">
+    <Position X="15.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Seven.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Six" Collapsed="true">
+    <Position X="19.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Six.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Ten" Collapsed="true">
+    <Position X="24.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Ten.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Three" Collapsed="true">
+    <Position X="28.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Three.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Two" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cards\Two.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.HumanPlayer" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAARABQAAAAAAAAAEAAgAAAAAAAAAAAAAQIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Players\HumanPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Player" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAARABQACAACCAAAEgAlAAgSQQgAAABgAwIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Players\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.RandomAIPlayer" Collapsed="true">
+    <Position X="7.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAARABQAAAAAAAAAEAAgAAAAAAAAAAAAAQIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Players\RandomAIPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Card" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAECgIBAAAECAAAAABAAAEAEEA4AAAAAFAAAA=</HashCode>
+      <FileName>Assets\Scripts\Card.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MakaoGame.Deck" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAACCAIAAABAAgAAAAAEAAAAEAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Deck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MakaoGame.Game" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAQCIAAACAABAAEAgAIBBwAAAAAAxAgAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.Pile" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAggEAAAAAAAAAAAACAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Pile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AceEffectWindow" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAEAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\AceEffectWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListWindow" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAQAAAAAAAAAAAAAIAAAAAAEAAAAAAAIDIAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\ListWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneLoader" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAwAAAAAAAAAAAAEAAAAAQAAgAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\SceneLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.GUI.CardPicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\CardPicker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MakaoGame.GUI.CardPickWindow" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAEAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\CardPickWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MakaoGame.GUI.ColorPicker" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\ColorPicker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MakaoGame.GUI.JackEffectWindow" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUI\JackEffectWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="MakaoGame.CardSuit" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAESA=</HashCode>
+      <FileName>Assets\Scripts\Card.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

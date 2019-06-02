@@ -18,7 +18,7 @@ namespace MakaoGame
 
         public override void Effect()
         {
-            Game.context.CurrentPlayer.AceEffect(this);
+            Game.context.CurrentPlayer.ChooseAceColor(this);
         }
 
         public override bool IsCounterTo(Card card)
@@ -47,7 +47,7 @@ namespace MakaoGame
         public override void Play()
         {
             Game.context.Pile.AddToPile(this);
-            Game.context.CurrentPlayer.AceEffect(this);
+            Game.context.CurrentPlayer.ChooseAceColor(this);
         }
     }
 }

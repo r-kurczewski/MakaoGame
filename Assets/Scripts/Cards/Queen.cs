@@ -11,7 +11,7 @@ namespace MakaoGame
         public override void CounterPlay()
         {
             Game.context.Pile.AddToPile(this);
-            Game.context.Pile.actionChain.Clear();
+            Game.context.actionChain.Clear();
             Game.context.EndPlayerTurn();
         }
 

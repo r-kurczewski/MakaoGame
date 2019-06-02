@@ -9,10 +9,5 @@ namespace MakaoGame
     class Six : Card
     {
         public override string Label => "6";
-
-        public override bool IsCounterTo(Card card)
-        {
-            return false;
-        }
     }
 }

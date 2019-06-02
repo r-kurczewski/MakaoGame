@@ -12,19 +12,22 @@ namespace MakaoGame
         {
             var context = Game.context;
             for (int i = 0; i < 2; i++)
+            {
                 context.CurrentPlayer.GiveCard(context.Deck.DrawCard());
+                Game.context.actionChain.Remove(this);
+            }
         }
 
         public override bool IsCounterTo(Card card)
         {
             var type = card.GetType();
-            return type == typeof(Two) || (type == typeof(Three) && CardColor == card.CardColor);
+            return type == typeof(Two) || ((type == typeof(Three) || type == typeof(King)) && CardColor == card.CardColor);
         }
 
         public override void Play()
         {
             Game.context.Pile.AddToPile(this);
-            Game.context.Pile.actionChain.Add(this);
+            Game.context.actionChain.Add(this);
             Game.context.PassAction();
         }
 

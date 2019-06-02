@@ -9,7 +9,6 @@ namespace MakaoGame
     public class Pile : MonoBehaviour
     {
         [SerializeField] List<Card> cards = new List<Card>();
-        public List<Card> actionChain;
 
         public Card TopCard { get { return cards.LastOrDefault(); } }
 
@@ -30,7 +29,7 @@ namespace MakaoGame
         //        switch (card.EffectType)
         //        {
         //            case EffectType.Counterable:
-        //                Game.context.Pile.actionChain.Add(card);
+        //                Game.context.actionChain.Add(card);
         //                Game.context.PassAction();
         //                break;
         //            case EffectType.Instant:
