@@ -249,11 +249,11 @@
             </summary>
             <param name="value">The <see cref="T:System.UInt16"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteValue(System.string)">
+        <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteValue(System.Char)">
             <summary>
-            Writes a <see cref="T:System.string"/> value.
+            Writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteValue(System.Byte)">
             <summary>
@@ -1075,7 +1075,7 @@
         </member>
         <member name="F:Newtonsoft.Json.Formatting.Indented">
             <summary>
-            Causes child objects to be indented according to the <see cref="P:Newtonsoft.Json.JsonTextWriter.Indentation"/> and <see cref="P:Newtonsoft.Json.JsonTextWriter.Indentstring"/> settings.
+            Causes child objects to be indented according to the <see cref="P:Newtonsoft.Json.JsonTextWriter.Indentation"/> and <see cref="P:Newtonsoft.Json.JsonTextWriter.IndentChar"/> settings.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.IArrayPool`1">
@@ -1345,12 +1345,12 @@
             <param name="value">The value to convert.</param>
             <returns>A JSON string representation of the <see cref="T:System.Boolean"/>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.string)">
+        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.Char)">
             <summary>
-            Converts the <see cref="T:System.string"/> to its JSON string representation.
+            Converts the <see cref="T:System.Char"/> to its JSON string representation.
             </summary>
             <param name="value">The value to convert.</param>
-            <returns>A JSON string representation of the <see cref="T:System.string"/>.</returns>
+            <returns>A JSON string representation of the <see cref="T:System.Char"/>.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.Enum)">
             <summary>
@@ -1464,20 +1464,20 @@
             <param name="value">The value to convert.</param>
             <returns>A JSON string representation of the <see cref="T:System.String"/>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.String,System.string)">
+        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.String,System.Char)">
             <summary>
             Converts the <see cref="T:System.String"/> to its JSON string representation.
             </summary>
             <param name="value">The value to convert.</param>
-            <param name="delimiter">The string delimiter stringacter.</param>
+            <param name="delimiter">The string delimiter character.</param>
             <returns>A JSON string representation of the <see cref="T:System.String"/>.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.String,System.string,Newtonsoft.Json.StringEscapeHandling)">
+        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.String,System.Char,Newtonsoft.Json.StringEscapeHandling)">
             <summary>
             Converts the <see cref="T:System.String"/> to its JSON string representation.
             </summary>
             <param name="value">The value to convert.</param>
-            <param name="delimiter">The string delimiter stringacter.</param>
+            <param name="delimiter">The string delimiter character.</param>
             <param name="stringEscapeHandling">The string escape handling.</param>
             <returns>A JSON string representation of the <see cref="T:System.String"/>.</returns>
         </member>
@@ -2387,9 +2387,9 @@
             The default is <c>false</c>.
             </value>
         </member>
-        <member name="P:Newtonsoft.Json.JsonReader.Quotestring">
+        <member name="P:Newtonsoft.Json.JsonReader.QuoteChar">
             <summary>
-            Gets the quotation mark stringacter used to enclose the value of a string.
+            Gets the quotation mark character used to enclose the value of a string.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonReader.DateTimeZoneHandling">
@@ -3331,7 +3331,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonTextReader.ArrayPool">
             <summary>
-            Gets or sets the reader's stringacter buffer pool.
+            Gets or sets the reader's character buffer pool.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.JsonTextReader.Read">
@@ -3474,7 +3474,7 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteIndentAsync(System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes indent stringacters.
+            Asynchronously writes indent characters.
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
@@ -3571,7 +3571,7 @@
             <summary>
             Asynchronously writes the given white space.
             </summary>
-            <param name="ws">The string of white space stringacters.</param>
+            <param name="ws">The string of white space characters.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
@@ -3627,21 +3627,21 @@
             <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
             execute synchronously, returning an already-completed task.</remarks>
         </member>
-        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValueAsync(System.string,System.Threading.CancellationToken)">
+        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValueAsync(System.Char,System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes a <see cref="T:System.string"/> value.
+            Asynchronously writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
             execute synchronously, returning an already-completed task.</remarks>
         </member>
-        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValueAsync(System.Nullable{System.string},System.Threading.CancellationToken)">
+        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValueAsync(System.Nullable{System.Char},System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value.
+            Asynchronously writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value to write.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>Derived classes must override this method to get asynchronous behaviour. Otherwise it will
@@ -4006,22 +4006,22 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonTextWriter.ArrayPool">
             <summary>
-            Gets or sets the writer's stringacter array pool.
+            Gets or sets the writer's character array pool.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonTextWriter.Indentation">
             <summary>
-            Gets or sets how many <see cref="P:Newtonsoft.Json.JsonTextWriter.Indentstring"/>s to write for each level in the hierarchy when <see cref="P:Newtonsoft.Json.JsonWriter.Formatting"/> is set to <see cref="F:Newtonsoft.Json.Formatting.Indented"/>.
+            Gets or sets how many <see cref="P:Newtonsoft.Json.JsonTextWriter.IndentChar"/>s to write for each level in the hierarchy when <see cref="P:Newtonsoft.Json.JsonWriter.Formatting"/> is set to <see cref="F:Newtonsoft.Json.Formatting.Indented"/>.
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.JsonTextWriter.Quotestring">
+        <member name="P:Newtonsoft.Json.JsonTextWriter.QuoteChar">
             <summary>
-            Gets or sets which stringacter to use to quote attribute values.
+            Gets or sets which character to use to quote attribute values.
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.JsonTextWriter.Indentstring">
+        <member name="P:Newtonsoft.Json.JsonTextWriter.IndentChar">
             <summary>
-            Gets or sets which stringacter to use for indenting when <see cref="P:Newtonsoft.Json.JsonWriter.Formatting"/> is set to <see cref="F:Newtonsoft.Json.Formatting.Indented"/>.
+            Gets or sets which character to use for indenting when <see cref="P:Newtonsoft.Json.JsonWriter.Formatting"/> is set to <see cref="F:Newtonsoft.Json.Formatting.Indented"/>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonTextWriter.QuoteName">
@@ -4084,7 +4084,7 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteIndent">
             <summary>
-            Writes indent stringacters.
+            Writes indent characters.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValueDelimiter">
@@ -4192,11 +4192,11 @@
             </summary>
             <param name="value">The <see cref="T:System.UInt16"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValue(System.string)">
+        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValue(System.Char)">
             <summary>
-            Writes a <see cref="T:System.string"/> value.
+            Writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValue(System.Byte)">
             <summary>
@@ -4262,7 +4262,7 @@
             <summary>
             Writes the given white space.
             </summary>
-            <param name="ws">The string of white space stringacters.</param>
+            <param name="ws">The string of white space characters.</param>
         </member>
         <member name="T:Newtonsoft.Json.JsonToken">
             <summary>
@@ -4391,9 +4391,9 @@
             Gets the path of the current JSON token. 
             </summary>
         </member>
-        <member name="P:Newtonsoft.Json.JsonValidatingReader.Quotestring">
+        <member name="P:Newtonsoft.Json.JsonValidatingReader.QuoteChar">
             <summary>
-            Gets the quotation mark stringacter used to enclose the value of a string.
+            Gets the quotation mark character used to enclose the value of a string.
             </summary>
             <value></value>
         </member>
@@ -4528,7 +4528,7 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteIndentAsync(System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes indent stringacters.
+            Asynchronously writes indent characters.
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
@@ -4773,21 +4773,21 @@
             <remarks>The default behaviour is to execute synchronously, returning an already-completed task. Derived
             classes can override this behaviour for true asynchronicity.</remarks>
         </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValueAsync(System.string,System.Threading.CancellationToken)">
+        <member name="M:Newtonsoft.Json.JsonWriter.WriteValueAsync(System.Char,System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes a <see cref="T:System.string"/> value.
+            Asynchronously writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>The default behaviour is to execute synchronously, returning an already-completed task. Derived
             classes can override this behaviour for true asynchronicity.</remarks>
         </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValueAsync(System.Nullable{System.string},System.Threading.CancellationToken)">
+        <member name="M:Newtonsoft.Json.JsonWriter.WriteValueAsync(System.Nullable{System.Char},System.Threading.CancellationToken)">
             <summary>
-            Asynchronously writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value.
+            Asynchronously writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value to write.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>The default behaviour is to execute synchronously, returning an already-completed task. Derived
@@ -5116,7 +5116,7 @@
             <summary>
             Asynchronously writes the given white space.
             </summary>
-            <param name="ws">The string of white space stringacters.</param>
+            <param name="ws">The string of white space characters.</param>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
             <remarks>The default behaviour is to execute synchronously, returning an already-completed task. Derived
@@ -5306,7 +5306,7 @@
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteIndent">
             <summary>
-            Writes indent stringacters.
+            Writes indent characters.
             </summary>
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteValueDelimiter">
@@ -5401,11 +5401,11 @@
             </summary>
             <param name="value">The <see cref="T:System.UInt16"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.string)">
+        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Char)">
             <summary>
-            Writes a <see cref="T:System.string"/> value.
+            Writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Byte)">
             <summary>
@@ -5503,11 +5503,11 @@
             </summary>
             <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.UInt16"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Nullable{System.string})">
+        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Nullable{System.Char})">
             <summary>
-            Writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value.
+            Writes a <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Nullable{System.Byte})">
             <summary>
@@ -5580,7 +5580,7 @@
             <summary>
             Writes the given white space.
             </summary>
-            <param name="ws">The string of white space stringacters.</param>
+            <param name="ws">The string of white space characters.</param>
         </member>
         <member name="M:Newtonsoft.Json.JsonWriter.Dispose(System.Boolean)">
             <summary>
@@ -7175,9 +7175,9 @@
             <param name="value">The value.</param>
             <returns>The result of the conversion.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.Nullable{System.string}">
+        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.Nullable{System.Char}">
             <summary>
-            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.Nullable`1"/> of <see cref="T:System.string"/>.
+            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.Nullable`1"/> of <see cref="T:System.Char"/>.
             </summary>
             <param name="value">The value.</param>
             <returns>The result of the conversion.</returns>
@@ -7203,9 +7203,9 @@
             <param name="value">The value.</param>
             <returns>The result of the conversion.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.string">
+        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.Char">
             <summary>
-            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.string"/>.
+            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.Char"/>.
             </summary>
             <param name="value">The value.</param>
             <returns>The result of the conversion.</returns>
@@ -8151,11 +8151,11 @@
             </summary>
             <param name="value">The <see cref="T:System.UInt16"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteValue(System.string)">
+        <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteValue(System.Char)">
             <summary>
-            Writes a <see cref="T:System.string"/> value.
+            Writes a <see cref="T:System.Char"/> value.
             </summary>
-            <param name="value">The <see cref="T:System.string"/> value to write.</param>
+            <param name="value">The <see cref="T:System.Char"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteValue(System.Byte)">
             <summary>
@@ -8243,7 +8243,7 @@
             </summary>
             <param name="value">The value.</param>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JValue.#ctor(System.string)">
+        <member name="M:Newtonsoft.Json.Linq.JValue.#ctor(System.Char)">
             <summary>
             Initializes a new instance of the <see cref="T:Newtonsoft.Json.Linq.JValue"/> class with the given value.
             </summary>
@@ -10655,17 +10655,17 @@
         </member>
         <member name="F:Newtonsoft.Json.StringEscapeHandling.Default">
             <summary>
-            Only control stringacters (e.g. newline) are escaped.
+            Only control characters (e.g. newline) are escaped.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.StringEscapeHandling.EscapeNonAscii">
             <summary>
-            All non-ASCII and control stringacters (e.g. newline) are escaped.
+            All non-ASCII and control characters (e.g. newline) are escaped.
             </summary>
         </member>
         <member name="F:Newtonsoft.Json.StringEscapeHandling.EscapeHtml">
             <summary>
-            HTML (&lt;, &gt;, &amp;, &apos;, &quot;) and control stringacters (e.g. newline) are escaped.
+            HTML (&lt;, &gt;, &amp;, &apos;, &quot;) and control characters (e.g. newline) are escaped.
             </summary>
         </member>
         <member name="T:Newtonsoft.Json.TypeNameAssemblyFormatHandling">

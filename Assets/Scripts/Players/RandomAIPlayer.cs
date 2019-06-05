@@ -14,7 +14,7 @@ namespace MakaoGame
             card.transform.SetParent(cardFolder, false);
             card.transform.localScale = Vector3.one;
             cards.Add(card);
-            //card.Hide();
+            //card.Hide(); // Debug
         }
 
         public override void MakeAMove()
@@ -65,6 +65,7 @@ namespace MakaoGame
         public override void Win()
         {
             ActiveTurnIndicator.color = Color.grey;
+            nameLabel.color = Color.gray;
         }
 
         public override void Lose()
@@ -104,8 +105,6 @@ namespace MakaoGame
                     break;
             }
             jack.Request = cardType;
-            Game.context.Pile.AddToPile(jack);
-            Game.context.actionChain.Add(jack);
             Game.context.PassAction();
             Debug.Log($"{this.name} requests {cardType.Name}");
         }
@@ -119,15 +118,17 @@ namespace MakaoGame
             {
                 Card card = toPlay[Random.Range(0, toPlay.Count)];
                 Game.context.Pile.AddToPile(card);
+                cards.Remove(card);
                 Debug.Log($"{this.name} fulfill request with {card.name}");
             }
             else
+            {
                 DrawACard();
+            }
 
             if (jack.ThrowingPlayer == this)
             {
                 Game.context.actionChain.Clear();
-                Game.context.EndPlayerTurn();
             }
             else Game.context.PassAction();
         }

@@ -3,40 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace MakaoGame
 {
-    public static void Load(string name)
+    public class SceneLoader : MonoBehaviour
     {
-        SceneManager.LoadScene(name);
-    }
+        public static void Load(string name)
+        {
+            SceneManager.LoadScene(name);
+        }
 
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+        public void MainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
 
-    public void Game()
-    {
-        SceneManager.LoadScene("GameView");
-    }
+        public void Game()
+        {
+            SceneManager.LoadScene("GameView");
+        }
 
-    public void Win()
-    {
-        SceneManager.LoadScene("Win");
-    }
+        public void Win()
+        {
+            SceneManager.LoadScene("Win");
+        }
 
-    public void Lose()
-    {
-        SceneManager.LoadScene("Lose");
-    }
+        public void Lose()
+        {
+            SceneManager.LoadScene("Lose");
+        }
 
-    public void Rules()
-    {
-        SceneManager.LoadScene("Rules");
-    }
+        public void Rules()
+        {
+            SceneManager.LoadScene("Rules");
+        }
 
-    public void Quit()
-    {
-        Application.Quit();
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

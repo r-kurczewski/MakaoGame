@@ -97,13 +97,12 @@ namespace MakaoGame
             window.Accept.onClick.AddListener(delegate
             {
                 jack.Request = window.Pick.original.GetType();
-                Game.context.Pile.AddToPile(jack);
-                Game.context.actionChain.Add(jack);
-                Game.context.PassAction(false);
+                Game.context.PassAction();
                 window.Close();
             });
             window.Decline.onClick.AddListener(delegate
             {
+                Game.context.actionChain.Clear();
                 Game.context.EndPlayerTurn();
                 window.Close();
             });
@@ -146,7 +145,7 @@ namespace MakaoGame
             }
             else
             {
-                Game.context.PassAction(false);
+                Game.context.PassAction();
             }
         }
     }

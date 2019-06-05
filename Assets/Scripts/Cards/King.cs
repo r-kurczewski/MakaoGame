@@ -31,16 +31,16 @@ namespace MakaoGame
                     for (int i = 0; i < 5; i++)
                     {
                         Game.context.CurrentPlayer.GiveCard(Game.context.Deck.DrawCard());
-                        Game.context.actionChain.Remove(this);
                     }
+                        Game.context.actionChain.Remove(this);
                     break;
             }
         }
 
         public override bool IsCounterTo(Card card)
         {
-            return ((card.GetType() == typeof(King)) && ((CardColor == CardSuit.Heart) || (CardColor == CardSuit.Pike)))
-                    || ((card.GetType() == typeof(Two) || card.GetType() == typeof(Three)) && (CardColor == card.CardColor));
+            return (card.GetType() == typeof(Two) || card.GetType() == typeof(Three) || card.GetType() == typeof(King)) 
+                && (CardColor == CardSuit.Heart || CardColor == CardSuit.Pike);
         }
 
         public override void Play()

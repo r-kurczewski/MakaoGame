@@ -14,8 +14,8 @@ namespace MakaoGame
             for (int i = 0; i < 3; i++)
             {
                 context.CurrentPlayer.GiveCard(context.Deck.DrawCard());
-                Game.context.actionChain.Remove(this);
             }
+                Game.context.actionChain.Remove(this);
         }
 
         public override bool IsCounterTo(Card card)

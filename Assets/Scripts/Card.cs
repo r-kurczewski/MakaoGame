@@ -31,17 +31,19 @@ namespace MakaoGame
             Obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
             if (hideOnStart) Hide();
 
+            GetSymbolParameters(CardColor, out char symbolChar, out Color color);
             TMP_Text label1 = transform.Find("Card/Front/Label1").GetComponent<TMP_Text>();
             TMP_Text label2 = transform.Find("Card/Front/Label2").GetComponent<TMP_Text>();
             TMP_Text symbol = transform.Find("Card/Front/Symbol").GetComponent<TMP_Text>();
+            TMP_Text ace = transform.Find("Card/Front/Ace").GetComponentInChildren<TMP_Text>();
             label1.text = Label.ToString();
+            label1.color = color;
             label2.text = Label.ToString();
-            GetSymbolParameters(CardColor, out char symbolString, out Color color);
-            symbol.text = symbolString.ToString();
-            foreach (var label in GetComponentsInChildren<TMP_Text>())
-            {
-                label.color = color;
-            }
+            label2.color = color;
+            symbol.text = symbolChar.ToString();
+            symbol.color = color;
+            ace.color = color;
+            ace.text = symbolChar.ToString();
         }
 
         public virtual void Play()

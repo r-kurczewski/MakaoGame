@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - MakaoGame.Deck
     - MakaoGame.GUI.CardPickWindow
     - MakaoGame.GUI.JackEffectWindow
+    - MakaoGame.GUI.JackRequestWindow
     - MakaoGame.Game
     - MakaoGame.HumanPlayer
     - MakaoGame.Pile
@@ -75,17 +76,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9526}
     - Class: 114
-      Script: {instanceID: 10040}
+      Script: {instanceID: 10042}
     - Class: 114
-      Script: {instanceID: 10098}
+      Script: {instanceID: 10100}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 10504}
+      Script: {instanceID: 10506}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 10956}
+      Script: {instanceID: 10958}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -130,9 +131,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9504}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10510}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -225,23 +226,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9896}
     - Class: 114
-      Script: {instanceID: 9962}
+      Script: {instanceID: 9960}
     - Class: 114
-      Script: {instanceID: 10156}
+      Script: {instanceID: 9964}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10158}
     - Class: 114
-      Script: {instanceID: 10356}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 10448}
+      Script: {instanceID: 10358}
     - Class: 114
-      Script: {instanceID: 10504}
+      Script: {instanceID: 10450}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10506}
     - Class: 114
-      Script: {instanceID: 10778}
+      Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 10956}
+      Script: {instanceID: 10780}
+    - Class: 114
+      Script: {instanceID: 10958}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -294,9 +297,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9748}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10510}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -343,9 +346,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9504}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10344}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10510}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -637,7 +640,7 @@ ScriptsOnlyBuild:
     className: NetworkTransform
   - hash:
       serializedVersion: 2
-      Hash: 054a675f2f39003b7ded7d1477f4c83b
+      Hash: 12e93f4b5dbef30ecee7469b12c2c443
     assemblyName: Assembly-CSharp.dll
     namespaceName: MakaoGame
     className: Pile
@@ -922,7 +925,7 @@ ScriptsOnlyBuild:
       Hash: bfacab08d9d4be7b01ead5419a4e334c
     assemblyName: Assembly-CSharp.dll
     namespaceName: MakaoGame.GUI
-    className: JackEffectWindow
+    className: JackRequestWindow
   - hash:
       serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
@@ -949,6 +952,12 @@ ScriptsOnlyBuild:
     className: NetworkTransformVisualizer
   - hash:
       serializedVersion: 2
+      Hash: bfacab08d9d4be7b01ead5419a4e334c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: MakaoGame.GUI
+    className: JackEffectWindow
+  - hash:
+      serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
     namespaceName: MakaoGame
@@ -973,13 +982,13 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
-      Hash: ded4cb0eb1cd01847cd49bd607be6afb
+      Hash: 6776d00ccaefd8771a6f085a8eb4386a
     assemblyName: Assembly-CSharp.dll
     namespaceName: MakaoGame
     className: Jack
   - hash:
       serializedVersion: 2
-      Hash: 465b01a6e82f1c151797f523e8605f08
+      Hash: 12034992e440def967f64acab3caa6d8
     assemblyName: Assembly-CSharp.dll
     namespaceName: MakaoGame
     className: Game
@@ -1260,4 +1269,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/GameView.unity
   - Assets/Scenes/Win.unity
   - Assets/Scenes/Lose.unity
-  playerPath: C:/Users/radek/Desktop/UnoGame/UnoGame.exe
+  playerPath: C:/Users/radek/Desktop/Makao/MakaoGame.exe

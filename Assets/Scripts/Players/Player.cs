@@ -63,16 +63,19 @@ namespace MakaoGame
             Debug.Log($"{this.name} must wait a turn. ({SkipTurn + 1}->{SkipTurn})");
         }
 
-        public void AcceptAction(bool endTurn = true)
+        public void AcceptAction()
         {
             // Wywołuje każdy efekt od najnowszego
             for (int i = Game.context.actionChain.Count - 1; i >= 0; i--)
             {
-                var card = Game.context.actionChain.Last();
+                var card = Game.context.actionChain[i];
                 card.Effect();
             }
-            if (endTurn) Game.context.EndPlayerTurn();
-            //Debug.Log($"{this.name} takes an action.");
+            if (Game.context.actionChain.Count(c => c.GetType() == typeof(Jack) || c.GetType() == typeof(Queen)) == 0)
+            {
+                Game.context.EndPlayerTurn();
+            }
+            Debug.Log($"{this.name} takes an action.");
         }
 
         public void DrawACard()

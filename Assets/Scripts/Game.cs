@@ -11,10 +11,12 @@ namespace MakaoGame
     {
         public static Game context;
         [SerializeField] private int _currentPlayerId = 0;
+        [SerializeField] GameObject GUIBlock;
         [SerializeField] private Deck _deck;
         [SerializeField] private Pile _pile;
         [SerializeField] private List<Player> _players;
         public List<Card> actionChain = new List<Card>();
+
         public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
         public List<Player> Players
         {
@@ -61,19 +63,6 @@ namespace MakaoGame
             }
         }
 
-        public Player NextPlayer
-        {
-            get
-            {
-                var i = CurrentPlayerId + 1;
-                while (Players[i] == null)
-                {
-                    i++;
-                }
-                return Players[i];
-            }
-        }
-
         private void PreviousPlayerTurn()
         {
             do
@@ -109,11 +98,11 @@ namespace MakaoGame
                     Card card = Deck.DrawCard();
                     player.GiveCard(card);
                 }
-                player.GiveCard(Card.Create<Jack>(CardSuit.Pike));
+                //player.GiveCard(Card.Create<Jack>(CardSuit.Clover));
             }
+            //HumanPlayer.GiveCard(Card.Create<Two>(CardSuit.Tile));
+            //Players[1].GiveCard(Card.Create<King>(CardSuit.Tile));
             //HumanPlayer.GiveCard(Card.Create<Jack>(CardSuit.Heart));
-            HumanPlayer.GiveCard(Card.Create<Jack>(CardSuit.Heart));
-            Players[3].GiveCard(Card.Create<Jack>(CardSuit.Heart));
             UpdateGUILabels();
         }
 
@@ -137,20 +126,21 @@ namespace MakaoGame
             StartCoroutine("IPassAction");
         }
 
-        readonly int delay = 2;
+        readonly int delay = 3;
 
         private IEnumerator IPassAction()
         {
-            // opoźnienie tur komputerów
-            //if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
-                yield return new WaitForSeconds(delay);
+            GUIBlock.SetActive(true);
+            yield return new WaitForSeconds(delay);
+            GUIBlock.SetActive(false);
             CurrentPlayer.ApplyAction();
         }
 
         private IEnumerator IEndTurn()
         {
-            //if (CurrentPlayer != HumanPlayer || HumanPlayer?.SkipTurn != 0)
-                yield return new WaitForSeconds(delay);
+            GUIBlock.SetActive(true);
+            yield return new WaitForSeconds(delay);
+            GUIBlock.SetActive(false);
             CurrentPlayer.MakeAMove();
         }
 
