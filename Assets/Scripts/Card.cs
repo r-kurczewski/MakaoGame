@@ -1,26 +1,39 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using MakaoGame;
-using System;
-using System.Collections.Generic;
 
 namespace MakaoGame
 {
+    /// <summary>
+    /// Główna klasa kart.
+    /// </summary>
     [SelectionBase]
-    public abstract partial class Card : MonoBehaviour, IPointerDownHandler
+    public abstract class Card : MonoBehaviour, IPointerDownHandler
     {
+        /// <summary>
+        /// Referencja do grafiki karty
+        /// </summary>
         public GameObject Obj { get; private set; }
 
         [SerializeField] protected CardSuit _cardColor;
+        /// <summary>
+        /// Typ enum przechowujący informacje o kolorze karty.
+        /// </summary>
         public virtual CardSuit CardColor { get => _cardColor; protected set => _cardColor = value; }
 
+        /// <summary>
+        /// Etykieta karty
+        /// </summary>
         public abstract string Label { get; }
 
         private bool hideOnStart;
 
-        void Start()
+        /// <summary>
+        /// Inicjalizacja karty
+        /// </summary>
+        protected void Start()
         {
             foreach (Transform child in transform) DestroyImmediate(child.gameObject);
             Obj = Instantiate(Resources.Load<GameObject>("Prefabs/Card"), transform);
@@ -46,12 +59,18 @@ namespace MakaoGame
             ace.text = symbolChar.ToString();
         }
 
+        /// <summary>
+        /// Efekt po wyłożeniu karty na stos
+        /// </summary>
         public virtual void Play()
         {
             Game.context.Pile.AddToPile(this);
             Game.context.EndPlayerTurn();
         }
 
+        /// <summary>
+        /// Efekt po skontrowaniu kartą innej karty w łańcuchu akcji
+        /// </summary>
         public virtual void CounterPlay()
         {
             Game.context.Pile.AddToPile(this);
@@ -59,16 +78,30 @@ namespace MakaoGame
             Game.context.PassAction();
         }
 
+        /// <summary>
+        /// Efekt karty wywoływany na graczu, który przyjął akcję.
+        /// </summary>
         public virtual void Effect()
         {
 
         }
 
+        /// <summary>
+        ///  Zwraca informację czy karta może kontrować inną daną kartę.
+        /// </summary>
+        /// <param name="card">Karta do skontrowania</param>
+        /// <returns></returns>
         public virtual bool IsCounterTo(Card card)
         {
             return false;
         }
 
+        /// <summary>
+        /// Metoda do tworzenia gotowej karty danego typu
+        /// </summary>
+        /// <typeparam name="T">Klasa (Typ) karty</typeparam>
+        /// <param name="color">Kolor karty (enum)</param>
+        /// <returns></returns>
         public static T Create<T>(CardSuit color) where T : Card
         {
             T card = new GameObject().AddComponent<T>();
@@ -77,6 +110,9 @@ namespace MakaoGame
             return card;
         }
 
+        /// <summary>
+        /// Odpowiada za ukrycie awersu karty jej rewersem.
+        /// </summary>
         public void Hide()
         {
             try
@@ -88,12 +124,17 @@ namespace MakaoGame
                 hideOnStart = true;
             }
         }
-
+        /// <summary>
+        /// Odpowiada za odkrycie awersu karty.
+        /// </summary>
         public void Show()
         {
             transform.Find("Card/Back").GetComponent<Image>().enabled = false;
         }
 
+        /// <summary>
+        /// Metoda która wywołuje sie przy tasowaniu kart i odpowiada za przygotowanie karty do kolejnego użycia.
+        /// </summary>
         public virtual void Reset()
         {
 
@@ -102,6 +143,10 @@ namespace MakaoGame
         private readonly float maxTime = 0.5f;
         private float lastTimeClicked;
 
+        /// <summary>
+        /// Metoda odpowiadająca za rzucanie karty przez użytkownika.
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
             Game context = Game.context;
@@ -122,6 +167,12 @@ namespace MakaoGame
             }
         }
 
+        /// <summary>
+        /// Zwraca parametry potrzebne do renderowania grafiki karty
+        /// </summary>
+        /// <param name="cardColor">Kolor karty (enum)</param>
+        /// <param name="symbolstring">Znak odpowiadający danemu symbolowi karty w czcionka</param>
+        /// <param name="color">Właściwy kolor karty (czarny, czerwony)</param>
         public static void GetSymbolParameters(CardSuit cardColor, out char symbolstring, out Color color)
         {
             switch (cardColor)

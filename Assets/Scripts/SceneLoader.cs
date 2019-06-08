@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 
 namespace MakaoGame
 {
+    /// <summary>
+    /// Klasa odpowidająca za przejścia między scenami gry.
+    /// </summary>
     public class SceneLoader : MonoBehaviour
     {
-        public static void Load(string name)
-        {
-            SceneManager.LoadScene(name);
-        }
-
         public void MainMenu()
         {
             SceneManager.LoadScene("MainMenu");

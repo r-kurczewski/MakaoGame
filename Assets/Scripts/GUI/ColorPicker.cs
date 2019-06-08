@@ -5,15 +5,17 @@ using UnityEngine.EventSystems;
 
 namespace MakaoGame.GUI
 {
+    /// <summary>
+    /// Klasa wyboru koloru w GUI.
+    /// </summary>
     public class ColorPicker : MonoBehaviour, IPointerClickHandler
     {
         public CardSuit color;
 
-        void Start()
-        {
-            //name = color.ToString();
-        }
-
+        /// <summary>
+        /// Wybiera dany kolor w oknie.
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerClick(PointerEventData eventData)
         {
             var window = GetComponentInParent<AceEffectWindow>();

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MakaoGame
+namespace MakaoGame.Cards
 {
+    /// <summary>
+    /// Implementuje klasę <see cref="Card"/>
+    /// </summary>
     public class Three : Card
     {
         public override string Label => "3";

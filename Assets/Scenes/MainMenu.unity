@@ -596,16 +596,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Makao
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e3c9f8cb28b2304985b646b800ffbac, type: 2}
-  m_sharedMaterial: {fileID: -4957620657944701480, guid: 5e3c9f8cb28b2304985b646b800ffbac,
+  m_fontAsset: {fileID: 11400000, guid: b183224c340ca97468d34b1312a0891a, type: 2}
+  m_sharedMaterial: {fileID: 21291222267679162, guid: b183224c340ca97468d34b1312a0891a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1210694261}
   m_TextComponent: {fileID: 1320194327}
   m_materialReferenceIndex: 1
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1213876859}
   m_TextComponent: {fileID: 1343027646}
   m_materialReferenceIndex: 1

@@ -1,11 +1,16 @@
-﻿using MakaoGame.GUI;
+﻿using MakaoGame.Cards;
+using MakaoGame.GUI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace MakaoGame
+namespace MakaoGame.Players
 {
+    /// <summary>
+    /// Implementuje klasę <see cref="Player"/>
+    /// Klasa odpowiadająca za wykonywanie losowych ruchów komputerów.
+    /// </summary>
     [SelectionBase]
     public class RandomAIPlayer : Player
     {
@@ -14,7 +19,7 @@ namespace MakaoGame
             card.transform.SetParent(cardFolder, false);
             card.transform.localScale = Vector3.one;
             cards.Add(card);
-            //card.Hide(); // Debug
+            card.Hide(); // Debug
         }
 
         public override void MakeAMove()

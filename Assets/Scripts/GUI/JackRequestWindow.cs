@@ -1,17 +1,20 @@
-﻿using System;
+﻿using MakaoGame.Cards;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MakaoGame.GUI
 {
+    /// <summary>
+    /// Klasa okna wyboru żadania karty
+    /// </summary>
     class JackRequestWindow : CardPickWindow
     {
+        /// <summary>
+        /// Tworzy okno.
+        /// </summary>
+        /// <returns></returns>
         public static JackRequestWindow Create()
         {
-            #region creating list
             CardSuit color = CardSuit.Pike;
             var possibleRequests = new List<Card>
             {
@@ -22,7 +25,6 @@ namespace MakaoGame.GUI
                 Card.Create<Nine>(color),
                 Card.Create<Ten>(color),
             };
-            #endregion
             var window = Instantiate(Resources.Load<JackRequestWindow>("Prefabs/JackRequestWindow"), Game.context.transform);
             foreach (var card in possibleRequests)
             {

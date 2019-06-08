@@ -1,10 +1,15 @@
-﻿using MakaoGame.GUI;
+﻿using MakaoGame.Cards;
+using MakaoGame.GUI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace MakaoGame
+namespace MakaoGame.Players
 {
+    /// <summary>
+    /// Implementuje klasę <see cref="Player"/>
+    /// Klasa odpowiadająca za wykonywanie ruchów gracza.
+    /// </summary>
     public class HumanPlayer : Player
     {
         public override void GiveCard(Card card)
@@ -68,12 +73,12 @@ namespace MakaoGame
 
         public override void Win()
         {
-            SceneLoader.Load("Win");
+            FindObjectOfType<SceneLoader>().Win();
         }
 
         public override void Lose()
         {
-            SceneLoader.Load("Lose");
+            FindObjectOfType<SceneLoader>().Lose();
         }
 
         public override void ChooseAceColor(Ace card)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MakaoGame.Cards;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,9 @@ using static MakaoGame.Card;
 
 namespace MakaoGame
 {
+    /// <summary>
+    /// Klasa reprezentująca talię kart.
+    /// </summary>
     [SelectionBase]
     public class Deck : MonoBehaviour, IPointerDownHandler
     {
@@ -19,6 +23,9 @@ namespace MakaoGame
             cardNumber.text = cards.Count.ToString();
         }
 
+        /// <summary>
+        /// Odpowiada za tasowanie talii.
+        /// </summary>
         public void Shuffle()
         {
             for (int i = 0; i < cards.Count; i++)
@@ -31,49 +38,64 @@ namespace MakaoGame
             }
         }
 
-        public void AddCardImage(Card card)
+        /// <summary>
+        /// Odpowiada za wrzucenie karty do talii.
+        /// </summary>
+        /// <param name="card"></param>
+        public void PutCard(Card card)
         {
             card.transform.SetParent(transform.Find("Cards"));
             card.transform.rotation = Quaternion.identity;
             card.gameObject.SetActive(false);
+            cards.Add(card);
         }
 
+        /// <summary>
+        /// Dodaje karty ze stosu (oprócz ostatniej) do talii.
+        /// </summary>
         public void AddCardsFromPile()
         {
             foreach (var card in Game.context.Pile.ClearPile())
             {
                 card.Reset();
-                AddCardImage(card);
-                cards.Add(card);
+                PutCard(card);
             }
         }
 
+        /// <summary>
+        /// Tworzy talię standardową (52 karty)
+        /// </summary>
         public void Create()
         {
+            List<Card> deck = new List<Card>();
             foreach (CardSuit color in System.Enum.GetValues(typeof(CardSuit)))
             {
                 {
-                    cards.Add(Create<Two>(color));
-                    cards.Add(Create<Three>(color));
-                    cards.Add(Create<Four>(color));
-                    cards.Add(Create<Five>(color));
-                    cards.Add(Create<Six>(color));
-                    cards.Add(Create<Seven>(color));
-                    cards.Add(Create<Eight>(color));
-                    cards.Add(Create<Nine>(color));
-                    cards.Add(Create<Ten>(color));
-                    cards.Add(Create<Jack>(color));
-                    cards.Add(Create<Queen>(color));
-                    cards.Add(Create<King>(color));
-                    cards.Add(Create<Ace>(color));
+                    deck.Add(Create<Two>(color));
+                    deck.Add(Create<Three>(color));
+                    deck.Add(Create<Four>(color));
+                    deck.Add(Create<Five>(color));
+                    deck.Add(Create<Six>(color));
+                    deck.Add(Create<Seven>(color));
+                    deck.Add(Create<Eight>(color));
+                    deck.Add(Create<Nine>(color));
+                    deck.Add(Create<Ten>(color));
+                    deck.Add(Create<Jack>(color));
+                    deck.Add(Create<Queen>(color));
+                    deck.Add(Create<King>(color));
+                    deck.Add(Create<Ace>(color));
                 }
             }
-            foreach (var card in cards)
+            foreach (var card in deck)
             {
-                AddCardImage(card);
+                PutCard(card);
             }
         }
 
+        /// <summary>
+        /// Pobiera kartę z wierzchu.
+        /// </summary>
+        /// <returns>Pobrana karta</returns>
         public Card DrawCard()
         {
             if (cards.Count == 0) AddCardsFromPile();
@@ -84,6 +106,10 @@ namespace MakaoGame
             return card;
         }
 
+        /// <summary>
+        /// Odpowiada za dobranie karty przez użytkownika.
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
             if (Game.context.CurrentPlayer == Game.context.HumanPlayer)

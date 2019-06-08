@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace MakaoGame
+namespace MakaoGame.Cards
 {
+    /// <summary>
+    /// Implementuje klasę <see cref="Card"/>
+    /// </summary>
     public class Jack : Card
     {
         [SerializeField] private Player throwingPlayer;
@@ -15,6 +16,9 @@ namespace MakaoGame
 
         public override string Label => "J";
 
+        /// <summary>
+        /// Przechowuje informację o żądaniu gracza.
+        /// </summary>
         public Type Request
         {
             get => _request;
@@ -48,6 +52,10 @@ namespace MakaoGame
                 _request = value;
             }
         }
+
+        /// <summary>
+        /// Przechowuje informację kto rzucił kartę
+        /// </summary>
         public Player ThrowingPlayer { get => throwingPlayer; protected set => requestType = value.ToString(); }
 
         public override void CounterPlay()
@@ -80,9 +88,9 @@ namespace MakaoGame
 
         public override void Reset()
         {
-            Request = null;
+            _request = null;
             throwingPlayer = null;
-            transform.Find("Card/Front/Jack").GetComponent<TMP_Text>().text = "";
+            try { transform.Find("Card/Front/Jack").GetComponentInChildren<TMP_Text>().text = ""; } catch { Debug.Log(this.name); }
         }
     }
 }

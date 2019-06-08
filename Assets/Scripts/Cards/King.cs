@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MakaoGame
+namespace MakaoGame.Cards
 {
+    /// <summary>
+    /// Implementuje klasę <see cref="Card"/>
+    /// </summary>
     public class King : Card
     {
         public override string Label => "K";
@@ -39,8 +42,10 @@ namespace MakaoGame
 
         public override bool IsCounterTo(Card card)
         {
-            return (card.GetType() == typeof(Two) || card.GetType() == typeof(Three) || card.GetType() == typeof(King)) 
-                && (CardColor == CardSuit.Heart || CardColor == CardSuit.Pike);
+            if (CardColor == CardSuit.Clover || CardColor == CardSuit.Tile) return false;
+            if (card.GetType() == typeof(King) && (card.CardColor == CardSuit.Heart || card.CardColor == CardSuit.Pike)) return true;
+            else if ((card.GetType() == typeof(Two) || card.GetType() == typeof(Three)) && card.CardColor == CardColor) return true;
+            else return false;
         }
 
         public override void Play()

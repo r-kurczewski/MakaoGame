@@ -5,13 +5,23 @@ using UnityEngine;
 
 namespace MakaoGame
 {
+    /// <summary>
+    /// Klasa reprezentująca stos kart rzuconych.
+    /// </summary>
     [SelectionBase]
     public class Pile : MonoBehaviour
     {
         [SerializeField] List<Card> cards = new List<Card>();
 
+        /// <summary>
+        /// Karta z wierzchu
+        /// </summary>
         public Card TopCard { get { return cards.LastOrDefault(); } }
 
+        /// <summary>
+        /// Dodaje kartę do stosu
+        /// </summary>
+        /// <param name="card"></param>
         public void AddToPile(Card card)
         {
             cards.Add(card);
@@ -21,39 +31,10 @@ namespace MakaoGame
             card.Show();
         }
 
-        //public bool PutCard(Card card, bool checkIfCorrect = true)
-        //{
-        //    if (TopCard == null || TopCard.GetType() == card.GetType() || TopCard.CardColor == card.CardColor)
-        //    {
-        //        AddToPile(card);
-        //        switch (card.EffectType)
-        //        {
-        //            case EffectType.Counterable:
-        //                Game.context.actionChain.Add(card);
-        //                Game.context.PassAction();
-        //                break;
-        //            case EffectType.Instant:
-        //                card.Effect();
-        //                break;
-
-        //            default:
-        //                Game.context.EndPlayerTurn();
-        //                break;
-        //        }
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning($"Wrong card: {TopCard.name} on pile, {card.name} to put");
-        //        return false;
-        //    }
-        //}
-
-        //public void PutCounterCard(Card card)
-        //{
-        //    AddToPile(card);
-        //}
-
+        /// <summary>
+        /// Zwraca ze stosu listę kart do ponownego wtasowania
+        /// </summary>
+        /// <returns></returns>
         public List<Card> ClearPile()
         {
             var pileCards = cards.Take(cards.Count - 1).ToList();

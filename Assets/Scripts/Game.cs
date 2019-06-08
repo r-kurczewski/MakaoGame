@@ -1,23 +1,41 @@
-﻿using System;
+﻿using MakaoGame.Cards;
+using MakaoGame.Players;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 namespace MakaoGame
 {
+    /// <summary>
+    /// Klasa główna gry odpowiadająca za działanie całęgo programu.
+    /// </summary>
     public class Game : MonoBehaviour
     {
+        /// <summary>
+        /// Rreferencja do obiektu gry.
+        /// </summary>
         public static Game context;
         [SerializeField] private int _currentPlayerId = 0;
         [SerializeField] GameObject GUIBlock;
         [SerializeField] private Deck _deck;
         [SerializeField] private Pile _pile;
         [SerializeField] private List<Player> _players;
+
+        /// <summary>
+        /// Lista kart w aktualnej akcji
+        /// </summary>
         public List<Card> actionChain = new List<Card>();
 
+        /// <summary>
+        /// Indeks aktualnego gracza 
+        /// </summary>
         public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
+
+        /// <summary>
+        /// Lista graczy w grze
+        /// </summary>
         public List<Player> Players
         {
             get
@@ -29,6 +47,10 @@ namespace MakaoGame
                 _players = value;
             }
         }
+
+        /// <summary>
+        /// Referencja do klasy talii kart.
+        /// </summary>
         public Deck Deck
         {
             get
@@ -40,6 +62,10 @@ namespace MakaoGame
                 _deck = value;
             }
         }
+
+        /// <summary>
+        /// Referencja do klasy stosu kart.
+        /// </summary>
         public Pile Pile
         {
             get
@@ -51,8 +77,15 @@ namespace MakaoGame
                 _pile = value;
             }
         }
+
+        /// <summary>
+        /// Zwraca referencję do gracza pod kontrolą użytkownika
+        /// </summary>
         public Player HumanPlayer { get { return Players.FirstOrDefault(p => p.GetType() == typeof(HumanPlayer)); } }
 
+        /// <summary>
+        /// Zwraca referencję do gracza wykonującego aktualnie turę.
+        /// </summary>
         public Player CurrentPlayer
         {
             get
@@ -98,23 +131,31 @@ namespace MakaoGame
                     Card card = Deck.DrawCard();
                     player.GiveCard(card);
                 }
-                //player.GiveCard(Card.Create<Jack>(CardSuit.Clover));
+                //player.GiveCard(Card.Create<Two>(CardSuit.Tile)); // Debug
             }
-            //HumanPlayer.GiveCard(Card.Create<Two>(CardSuit.Tile));
-            //Players[1].GiveCard(Card.Create<King>(CardSuit.Tile));
-            //HumanPlayer.GiveCard(Card.Create<Jack>(CardSuit.Heart));
+            //HumanPlayer.GiveCard(Card.Create<Four>(CardSuit.Heart)); // Debug
+            //Players[1].GiveCard(Card.Create<Queen>(CardSuit.Heart)); // Debug
             UpdateGUILabels();
         }
 
+        readonly private int delay = 3;
+
+        /// <summary>
+        /// Odpowiada za zakończenie ruchu gracza.
+        /// </summary>
         public void EndPlayerTurn()
         {
             CheckWinningCondition();
             NextPlayerTurn();
             UpdateGUILabels();
+            StopAllCoroutines();
             StartCoroutine("IEndTurn");
         }
 
-
+        /// <summary>
+        /// Odpowida za przekazanie akcji następnemu graczowi.
+        /// </summary>
+        /// <param name="clockwise">Czy kierunek obrotu zgodny ze wskazówkami zegara?</param>
         public void PassAction(bool clockwise = true)
         {
             CheckWinningCondition();
@@ -123,10 +164,9 @@ namespace MakaoGame
             else
                 PreviousPlayerTurn();
             UpdateGUILabels();
+            StopAllCoroutines();
             StartCoroutine("IPassAction");
         }
-
-        readonly int delay = 3;
 
         private IEnumerator IPassAction()
         {
@@ -138,12 +178,13 @@ namespace MakaoGame
 
         private IEnumerator IEndTurn()
         {
-            GUIBlock.SetActive(true);
             yield return new WaitForSeconds(delay);
-            GUIBlock.SetActive(false);
             CurrentPlayer.MakeAMove();
         }
 
+        /// <summary>
+        /// Sprawdza warunki końcowe gry i odpowiada za zakończenie rozgrywki.
+        /// </summary>
         private void CheckWinningCondition()
         {
             if (CurrentPlayer.CardNumber == 0)
@@ -155,8 +196,15 @@ namespace MakaoGame
                 Debug.Log($"{player.name} wins.");
                 if (Players.Count(p => p != null) == 1)
                 {
-                    Players.FirstOrDefault().Lose();
-                    Debug.Log($"{Players[0].name} lost");
+                    try
+                    {
+                        Players.FirstOrDefault().Lose();
+                        Debug.Log($"{Players[0].name} lost");
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Debug.LogWarning("Couldn't load Lose method.");
+                    }
                 }
             }
         }

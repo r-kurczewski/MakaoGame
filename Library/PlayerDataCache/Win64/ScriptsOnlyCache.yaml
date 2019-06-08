@@ -1,17 +1,17 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - AceEffectWindow
-    - ListWindow
     - MakaoGame.Deck
+    - MakaoGame.GUI.AceEffectWindow
     - MakaoGame.GUI.CardPickWindow
     - MakaoGame.GUI.JackEffectWindow
     - MakaoGame.GUI.JackRequestWindow
+    - MakaoGame.GUI.ListWindow
     - MakaoGame.Game
-    - MakaoGame.HumanPlayer
     - MakaoGame.Pile
-    - MakaoGame.RandomAIPlayer
-    - SceneLoader
+    - MakaoGame.Players.HumanPlayer
+    - MakaoGame.Players.RandomAIPlayer
+    - MakaoGame.SceneLoader
     Unity.TextMeshPro.Editor.dll:
     - TMPro.EditorUtilities.TMP_SettingsEditor
     Unity.TextMeshPro.dll:
@@ -60,33 +60,37 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9404}
+      Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9416}
+      Script: {instanceID: 9412}
     - Class: 114
-      Script: {instanceID: 9422}
+      Script: {instanceID: 9414}
+    - Class: 114
+      Script: {instanceID: 9420}
+    - Class: 114
+      Script: {instanceID: 9426}
     - Class: 114
       Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9430}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9472}
+      Script: {instanceID: 9502}
     - Class: 114
-      Script: {instanceID: 9526}
+      Script: {instanceID: 9524}
     - Class: 114
-      Script: {instanceID: 10042}
+      Script: {instanceID: 10038}
     - Class: 114
-      Script: {instanceID: 10100}
+      Script: {instanceID: 10096}
     - Class: 114
-      Script: {instanceID: 10344}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10506}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 10958}
+      Script: {instanceID: 10952}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -117,23 +121,23 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 9412}
+    - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9416}
+      Script: {instanceID: 9420}
     - Class: 114
-      Script: {instanceID: 9422}
+      Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9428}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9472}
+      Script: {instanceID: 9502}
     - Class: 114
-      Script: {instanceID: 9504}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10344}
-    - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -176,75 +180,75 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9270}
+      Script: {instanceID: 9268}
+    - Class: 114
+      Script: {instanceID: 9320}
     - Class: 114
       Script: {instanceID: 9322}
     - Class: 114
-      Script: {instanceID: 9324}
+      Script: {instanceID: 9338}
     - Class: 114
-      Script: {instanceID: 9340}
+      Script: {instanceID: 9366}
     - Class: 114
-      Script: {instanceID: 9368}
+      Script: {instanceID: 9384}
     - Class: 114
-      Script: {instanceID: 9386}
+      Script: {instanceID: 9412}
     - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
       Script: {instanceID: 9416}
     - Class: 114
-      Script: {instanceID: 9418}
+      Script: {instanceID: 9420}
     - Class: 114
-      Script: {instanceID: 9422}
+      Script: {instanceID: 9426}
     - Class: 114
       Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9430}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9442}
     - Class: 114
-      Script: {instanceID: 9444}
+      Script: {instanceID: 9458}
     - Class: 114
       Script: {instanceID: 9460}
     - Class: 114
       Script: {instanceID: 9462}
     - Class: 114
-      Script: {instanceID: 9464}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9472}
+      Script: {instanceID: 9482}
     - Class: 114
-      Script: {instanceID: 9484}
+      Script: {instanceID: 9502}
     - Class: 114
-      Script: {instanceID: 9504}
+      Script: {instanceID: 9706}
     - Class: 114
-      Script: {instanceID: 9708}
+      Script: {instanceID: 9746}
     - Class: 114
-      Script: {instanceID: 9748}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9842}
+      Script: {instanceID: 9882}
     - Class: 114
-      Script: {instanceID: 9884}
+      Script: {instanceID: 9894}
     - Class: 114
-      Script: {instanceID: 9896}
+      Script: {instanceID: 9958}
     - Class: 114
-      Script: {instanceID: 9960}
+      Script: {instanceID: 9962}
     - Class: 114
-      Script: {instanceID: 9964}
+      Script: {instanceID: 10152}
     - Class: 114
-      Script: {instanceID: 10158}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10344}
+      Script: {instanceID: 10352}
     - Class: 114
-      Script: {instanceID: 10358}
+      Script: {instanceID: 10444}
     - Class: 114
-      Script: {instanceID: 10450}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 10506}
+      Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10774}
     - Class: 114
-      Script: {instanceID: 10780}
-    - Class: 114
-      Script: {instanceID: 10958}
+      Script: {instanceID: 10952}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -281,25 +285,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 9412}
+    - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9416}
+      Script: {instanceID: 9420}
     - Class: 114
-      Script: {instanceID: 9422}
+      Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9428}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9472}
+      Script: {instanceID: 9502}
     - Class: 114
-      Script: {instanceID: 9504}
+      Script: {instanceID: 9746}
     - Class: 114
-      Script: {instanceID: 9748}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10344}
-    - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -332,23 +336,23 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 9412}
+    - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9416}
+      Script: {instanceID: 9420}
     - Class: 114
-      Script: {instanceID: 9422}
+      Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9428}
+      Script: {instanceID: 9434}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9470}
     - Class: 114
-      Script: {instanceID: 9472}
+      Script: {instanceID: 9502}
     - Class: 114
-      Script: {instanceID: 9504}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10344}
-    - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -402,7 +406,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Four
   - hash:
       serializedVersion: 2
@@ -414,7 +418,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: e758f8772db6345e26d6820dfde148ae
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame.GUI
     className: AceEffectWindow
   - hash:
       serializedVersion: 2
@@ -630,7 +634,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame
     className: SceneLoader
   - hash:
       serializedVersion: 2
@@ -846,7 +850,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: King
   - hash:
       serializedVersion: 2
@@ -894,7 +898,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 4dfd2b229b6469975f5adf97f20a4681
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: MakaoGame.GUI
     className: ListWindow
   - hash:
       serializedVersion: 2
@@ -912,7 +916,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Two
   - hash:
       serializedVersion: 2
@@ -960,7 +964,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Five
   - hash:
       serializedVersion: 2
@@ -984,7 +988,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 6776d00ccaefd8771a6f085a8eb4386a
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Jack
   - hash:
       serializedVersion: 2
@@ -1002,7 +1006,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Seven
   - hash:
       serializedVersion: 2
@@ -1038,7 +1042,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Queen
   - hash:
       serializedVersion: 2
@@ -1050,7 +1054,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Eight
   - hash:
       serializedVersion: 2
@@ -1068,11 +1072,11 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Nine
   - hash:
       serializedVersion: 2
-      Hash: 4a0369cd366c126cd420018a4ac01f32
+      Hash: 35a9693c388776aaf487636491a20f11
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_FontAsset
@@ -1146,7 +1150,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: a756527e229e3eb9704e4501e0deffbf
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Players
     className: RandomAIPlayer
   - hash:
       serializedVersion: 2
@@ -1164,7 +1168,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Three
   - hash:
       serializedVersion: 2
@@ -1176,13 +1180,13 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Six
   - hash:
       serializedVersion: 2
       Hash: fccc2cfbb53d7d836c338c027609edd0
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Ace
   - hash:
       serializedVersion: 2
@@ -1218,7 +1222,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: ded4cb0eb1cd01847cd49bd607be6afb
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Cards
     className: Ten
   - hash:
       serializedVersion: 2
@@ -1254,7 +1258,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: a756527e229e3eb9704e4501e0deffbf
     assemblyName: Assembly-CSharp.dll
-    namespaceName: MakaoGame
+    namespaceName: MakaoGame.Players
     className: HumanPlayer
   - hash:
       serializedVersion: 2
