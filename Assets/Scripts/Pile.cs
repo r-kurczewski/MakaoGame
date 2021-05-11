@@ -25,7 +25,7 @@ namespace MakaoGame
 		/// <param name="card"></param>
 		public void AddToPile(Card card)
 		{
-			Game.context.audioSource.PlayOneShot(putCardSound);
+			Game.instance.audioSource.PlayOneShot(putCardSound);
 			cards.Add(card);
 			card.transform.SetParent(transform, false);
 			card.transform.localPosition = Vector3.zero;

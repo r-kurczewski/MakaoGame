@@ -16,16 +16,17 @@ namespace MakaoGame
 		/// <summary>
 		/// Rreferencja do obiektu gry.
 		/// </summary>
-		public static Game context;
+		public static Game instance;
 
 		public AudioSource audioSource;
 
 		[Header("Data")]
 		[SerializeField] private int _currentPlayerId = 0;
-		[SerializeField] GameObject GUIBlock;
+		[SerializeField] GameObject GUIBlock = null;
 		[SerializeField] private Deck _deck;
 		[SerializeField] private Pile _pile;
 		[SerializeField] private List<Player> _players;
+		private bool clockwise = true;
 
 		/// <summary>
 		/// Lista kart w aktualnej akcji
@@ -83,11 +84,6 @@ namespace MakaoGame
 		}
 
 		/// <summary>
-		/// Zwraca referencję do gracza pod kontrolą użytkownika
-		/// </summary>
-		public Player HumanPlayer { get { return Players.FirstOrDefault(p => p.GetType() == typeof(HumanPlayer)); } }
-
-		/// <summary>
 		/// Zwraca referencję do gracza wykonującego aktualnie turę.
 		/// </summary>
 		public Player CurrentPlayer
@@ -100,8 +96,14 @@ namespace MakaoGame
 			}
 		}
 
+		public void SetCounterClockwise()
+		{
+			clockwise = false;
+		}
+
 		private void PreviousPlayerTurn()
 		{
+			CurrentPlayer.finishTurn = false;
 			do
 			{
 				CurrentPlayerId--;
@@ -111,6 +113,7 @@ namespace MakaoGame
 
 		private void NextPlayerTurn()
 		{
+			CurrentPlayer.finishTurn = false;
 			do
 			{
 				CurrentPlayerId++;
@@ -120,7 +123,7 @@ namespace MakaoGame
 
 		void Start()
 		{
-			context = this;
+			instance = this;
 			Debug.Log("Game started...");
 
 			// Tworzenie talii
@@ -137,50 +140,28 @@ namespace MakaoGame
 				}
 			}
 			UpdateGUILabels();
-		}
-
-		readonly private int delay = 3;
-
-		/// <summary>
-		/// Odpowiada za zakończenie ruchu gracza.
-		/// </summary>
-		public void EndPlayerTurn()
-		{
-			CheckWinningCondition();
-			NextPlayerTurn();
-			UpdateGUILabels();
-			StopAllCoroutines();
-			StartCoroutine(IEndTurn());
+			StartCoroutine(IManageTurns());
 		}
 
 		/// <summary>
-		/// Odpowida za przekazanie akcji następnemu graczowi.
+		/// Odpowiada za zarządzanie turami graczy.
 		/// </summary>
-		/// <param name="clockwise">Czy kierunek obrotu zgodny ze wskazówkami zegara?</param>
-		public void PassAction(bool clockwise = true)
+		public IEnumerator IManageTurns()
 		{
-			CheckWinningCondition();
-			if (clockwise)
-				NextPlayerTurn();
-			else
-				PreviousPlayerTurn();
-			UpdateGUILabels();
-			StopAllCoroutines();
-			StartCoroutine(IPassAction());
-		}
-
-		private IEnumerator IPassAction()
-		{
-			GUIBlock.SetActive(true);
-			yield return new WaitForSeconds(delay);
-			GUIBlock.SetActive(false);
-			CurrentPlayer.ApplyAction();
-		}
-
-		private IEnumerator IEndTurn()
-		{
-			yield return new WaitForSeconds(delay);
-			CurrentPlayer.MakeAMove();
+			while (true)
+			{
+				StartCoroutine(CurrentPlayer.Move());
+				yield return new WaitUntil(() => CurrentPlayer.finishTurn);
+				CheckWinningCondition();
+				UpdateGUILabels();
+				if (!clockwise)
+				{
+					PreviousPlayerTurn();
+					clockwise = true;
+				}
+				else NextPlayerTurn();
+				UpdateGUILabels();
+			}
 		}
 
 		/// <summary>

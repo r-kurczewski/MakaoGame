@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MakaoGame.Players;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,6 +28,8 @@ namespace MakaoGame
         /// Etykieta karty
         /// </summary>
         public abstract string Label { get; }
+
+        public virtual bool TakingActionEndsTurn { get; } = true;
 
         private bool hideOnStart;
 
@@ -64,8 +67,8 @@ namespace MakaoGame
         /// </summary>
         public virtual void Play()
         {
-            Game.context.Pile.AddToPile(this);
-            Game.context.EndPlayerTurn();
+            Game.instance.Pile.AddToPile(this);
+            Game.instance.CurrentPlayer.finishTurn = true;
         }
 
         /// <summary>
@@ -73,9 +76,9 @@ namespace MakaoGame
         /// </summary>
         public virtual void CounterPlay()
         {
-            Game.context.Pile.AddToPile(this);
-            Game.context.actionChain.Add(this);
-            Game.context.PassAction();
+            Game.instance.Pile.AddToPile(this);
+            Game.instance.actionChain.Add(this);
+            Game.instance.CurrentPlayer.finishTurn = true;
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace MakaoGame
         /// </summary>
         public virtual void Effect()
         {
-
+            return;
         }
 
         /// <summary>
@@ -137,7 +140,7 @@ namespace MakaoGame
         /// </summary>
         public virtual void Reset()
         {
-
+            return;
         }
 
         private readonly float maxTime = 0.5f;
@@ -149,19 +152,19 @@ namespace MakaoGame
         /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
-            Game context = Game.context;
-            var topCard = Game.context.Pile.TopCard;
-            if (context.CurrentPlayer == context.HumanPlayer // tura gracza
-                && context.HumanPlayer == GetComponentInParent<Player>() // karta w ręku gracza
-                && context.HumanPlayer.SkipTurn == 0 // gracz nie musi czekać tury
-                && (topCard == null || topCard.GetType() == GetType() || topCard.CardColor == CardColor)) //karta pasuje do koloru lub figury
+            var topCard = Game.instance.Pile.TopCard;
+            var player = GetComponentInParent<Player>();
+
+            if (player == Game.instance.CurrentPlayer
+                 && player is HumanPlayer
+                 && player.SkipTurns == 0
+                 && (topCard == null || topCard.GetType() == this.GetType() || topCard.CardColor == CardColor)) //karta pasuje do koloru lub figury
             {
                 float deltaTime = Time.time - lastTimeClicked;
 
                 if (deltaTime < maxTime)
                 {
-                    Game.context.HumanPlayer.Play(this);
-
+                    player.Play(this);
                 }
                 lastTimeClicked = Time.time;
             }
@@ -203,6 +206,11 @@ namespace MakaoGame
                     Debug.LogError("Wrong color of card.");
                     break;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Label} {CardColor}";
         }
     }
 

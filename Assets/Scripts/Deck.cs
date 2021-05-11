@@ -1,4 +1,5 @@
 ﻿using MakaoGame.Cards;
+using MakaoGame.Players;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -57,7 +58,7 @@ namespace MakaoGame
 		/// </summary>
 		public void AddCardsFromPile()
 		{
-			foreach (var card in Game.context.Pile.ClearPile())
+			foreach (var card in Game.instance.Pile.ClearPile())
 			{
 				card.Reset();
 				PutCard(card);
@@ -76,13 +77,13 @@ namespace MakaoGame
 					deck.Add(Create<Two>(color));
 					deck.Add(Create<Three>(color));
 					deck.Add(Create<Four>(color));
-					deck.Add(Create<Five>(color));
-					deck.Add(Create<Six>(color));
-					deck.Add(Create<Seven>(color));
-					deck.Add(Create<Eight>(color));
-					deck.Add(Create<Nine>(color));
-					deck.Add(Create<Ten>(color));
-					deck.Add(Create<Jack>(color));
+                    deck.Add(Create<Five>(color));
+                    deck.Add(Create<Six>(color));
+                    deck.Add(Create<Seven>(color));
+                    deck.Add(Create<Eight>(color));
+                    deck.Add(Create<Nine>(color));
+                    deck.Add(Create<Ten>(color));
+                    deck.Add(Create<Jack>(color));
 					deck.Add(Create<Queen>(color));
 					deck.Add(Create<King>(color));
 					deck.Add(Create<Ace>(color));
@@ -100,7 +101,7 @@ namespace MakaoGame
 		/// <returns>Pobrana karta</returns>
 		public Card DrawCard(bool playSound = true)
 		{
-			if(playSound) Game.context.audioSource.PlayOneShot(drawCardSound);
+			if(playSound) Game.instance.audioSource.PlayOneShot(drawCardSound);
 			if (cards.Count == 0) AddCardsFromPile();
 			Card card = cards.Last();
 			cards.Remove(card);
@@ -115,10 +116,10 @@ namespace MakaoGame
 		/// <param name="eventData"></param>
 		public void OnPointerDown(PointerEventData eventData)
 		{
-			if (Game.context.CurrentPlayer == Game.context.HumanPlayer)
+			if (Game.instance.CurrentPlayer is HumanPlayer)
 			{
-				Game.context.HumanPlayer.DrawACard();
-				Game.context.EndPlayerTurn();
+				Game.instance.CurrentPlayer.DrawCardAndEndTurn();
+				Game.instance.CurrentPlayer.finishTurn = true;
 			}
 
 			else Debug.LogWarning("Now is not a player turn!");

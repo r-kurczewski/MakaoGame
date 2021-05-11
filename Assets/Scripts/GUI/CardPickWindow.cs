@@ -21,7 +21,7 @@ namespace MakaoGame.GUI
 
         new public static CardPickWindow Create(List<Card> cards, string title = null)
         {
-            var window = Instantiate(Resources.Load<CardPickWindow>("Prefabs/CardPickWindow"), Game.context.transform);
+            var window = Instantiate(Resources.Load<CardPickWindow>("Prefabs/CardPickWindow"), Game.instance.transform);
             if (title != null) window.title.text = title;
             foreach (var card in cards)
             {

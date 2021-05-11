@@ -16,7 +16,7 @@ namespace MakaoGame.GUI
         /// <returns></returns>
         public static JackEffectWindow Create(List<Card> cards)
         {
-            var window = Instantiate(Resources.Load<JackEffectWindow>("Prefabs/JackEffectWindow"), Game.context.transform);
+            var window = Instantiate(Resources.Load<JackEffectWindow>("Prefabs/JackEffectWindow"), Game.instance.transform);
             foreach (var card in cards)
             {
                 CardPicker pick = Instantiate(card, window.listView).gameObject.AddComponent<CardPicker>();

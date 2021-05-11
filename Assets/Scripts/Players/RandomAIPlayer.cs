@@ -8,63 +8,62 @@ using UnityEngine;
 namespace MakaoGame.Players
 {
     /// <summary>
-    /// Implementuje klasę <see cref="Player"/>
+    /// Implementuje klasę <see cref="MakaoGame.Player"/>
     /// Klasa odpowiadająca za wykonywanie losowych ruchów komputerów.
     /// </summary>
     [SelectionBase]
     public class RandomAIPlayer : Player
     {
+        private const int actionDelay = 2;
+
         public override void GiveCard(Card card)
         {
-            card.transform.SetParent(cardFolder, false);
-            card.transform.localScale = Vector3.one;
-            cards.Add(card);
-            card.Hide(); // Debug
+            base.GiveCard(card);
+            //card.Hide(); // Debug
         }
 
-        public override void MakeAMove()
+        public override IEnumerator Move()
         {
-            if (SkipTurn > 0)
+            yield return new WaitForSeconds(actionDelay);
+            if (SkipTurns > 0)
             {
-                Wait();
-                Game.context.EndPlayerTurn();
-                return;
+                SkipAndEndTurn();
             }
-            Card card;
-            if (PlayableCards.Count > 0)
+            else if (Game.instance.actionChain.Count > 0)
             {
-                card = PlayableCards[Random.Range(0, PlayableCards.Count)];
+                ApplyAction();
+                if (SkipTurns > 0)
+                {
+                    SkipAndEndTurn();
+                }
+            }
+            else if (PlayableCards.Count > 0)
+            {
+                Card card = PlayableCards[Random.Range(0, PlayableCards.Count)];
                 Play(card);
             }
             else
             {
-                DrawACard();
-                Game.context.EndPlayerTurn();
-
+                DrawCardAndEndTurn();
             }
         }
 
         public override void ApplyAction()
         {
-            if (SkipTurn > 0)
-            {
-                Wait();
-                Game.context.PassAction();
-                return;
-            }
-            Card toCounter = Game.context.actionChain.Last();
-            bool wantToCounter = true;
+            Card toCounter = Game.instance.actionChain.Last();
             var counters = cards.Where(c => c.IsCounterTo(toCounter)).ToList();
+            bool wantToCounter = true;
+
             if (counters.Count > 0 && wantToCounter)
             {
                 Card counter = counters[Random.Range(0, counters.Count)];
                 Counter(counter);
-                return;
             }
             else
             {
                 AcceptAction();
             }
+            
         }
 
         public override void Win()
@@ -78,10 +77,10 @@ namespace MakaoGame.Players
 
         }
 
-        public override void ChooseAceColor(Ace card)
+        public override void ChooseAceColor(Ace ace)
         {
-            card.ChangeColor((CardSuit)Random.Range(0, System.Enum.GetValues(typeof(CardSuit)).Length));
-            Game.context.EndPlayerTurn();
+            ace.ChangeColor((CardSuit)Random.Range(0, System.Enum.GetValues(typeof(CardSuit)).Length));
+            finishTurn = true;
         }
 
         public override void ChooseJackRequest(Jack jack)
@@ -110,32 +109,25 @@ namespace MakaoGame.Players
                     break;
             }
             jack.Request = cardType;
-            Game.context.PassAction();
+            finishTurn = true;
             Debug.Log($"{this.name} requests {cardType.Name}");
         }
 
         public override void JackEffect(Jack jack)
         {
-            bool putCard = true;
+            bool playCard = true;
             List<Card> toPlay = cards.Where(c => c.GetType() == jack.Request).ToList();
 
-            if (putCard && toPlay.Count > 0)
+            if (playCard && toPlay.Count > 0)
             {
-                Card card = toPlay[Random.Range(0, toPlay.Count)];
-                Game.context.Pile.AddToPile(card);
-                cards.Remove(card);
-                Debug.Log($"{this.name} fulfill request with {card.name}");
+                Card pick = toPlay[Random.Range(0, toPlay.Count)];
+                Play(pick);
+                Debug.Log($"{this.name} fulfill request with {pick.name}");
             }
             else
             {
-                DrawACard();
+                DrawCardAndEndTurn();
             }
-
-            if (jack.ThrowingPlayer == this)
-            {
-                Game.context.actionChain.Clear();
-            }
-            else Game.context.PassAction();
         }
     }
 }

@@ -1,26 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace MakaoGame.Cards
+﻿namespace MakaoGame.Cards
 {
     /// <summary>
     /// Implementuje klasę <see cref="Card"/>
     /// </summary>
     public class Queen : Card
-    {
-        public override string Label => "Q";
+	{
+		public override string Label => "Q";
 
-        public override void CounterPlay()
-        {
-            Game.context.Pile.AddToPile(this);
-            Game.context.actionChain.Clear();
-            Game.context.EndPlayerTurn();
-        }
+		public override void CounterPlay()
+		{
+			Game.instance.Pile.AddToPile(this);
+			Game.instance.actionChain.Clear();
+			Game.instance.CurrentPlayer.finishTurn = true;
+		}
 
-        public override bool IsCounterTo(Card card)
-        {
-            return card.CardColor == CardColor;
-        }
-    }
+		public override bool IsCounterTo(Card card)
+		{
+			return card.CardColor == CardColor;
+		}
+	}
 }

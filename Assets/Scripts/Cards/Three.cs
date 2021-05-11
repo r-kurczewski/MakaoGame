@@ -1,37 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace MakaoGame.Cards
+﻿namespace MakaoGame.Cards
 {
     /// <summary>
     /// Implementuje klasę <see cref="Card"/>
     /// </summary>
     public class Three : Card
-    {
-        public override string Label => "3";
+	{
+		public override string Label => "3";
 
-        public override void Effect()
-        {
-            var context = Game.context;
-            for (int i = 0; i < 3; i++)
-            {
-                context.CurrentPlayer.GiveCard(context.Deck.DrawCard());
-            }
-                Game.context.actionChain.Remove(this);
-        }
+		public override void Effect()
+		{
+			var game = Game.instance;
+			for (int i = 0; i < 3; i++)
+			{
+				game.CurrentPlayer.GiveCard(game.Deck.DrawCard());
+			}
+			game.actionChain.Remove(this);
+			game.CurrentPlayer.finishTurn = true;
+		}
 
-        public override bool IsCounterTo(Card card)
-        {
-            var type = card.GetType();
-            return type == typeof(Three) || ((type == typeof(Two) || type == typeof(King)) && CardColor == card.CardColor);
-        }
+		public override bool IsCounterTo(Card card)
+		{
 
-        public override void Play()
-        {
-            Game.context.Pile.AddToPile(this);
-            Game.context.actionChain.Add(this);
-            Game.context.PassAction();
-        }
-    }
+			return card is Three || ((card is Two || card is King) && CardColor == card.CardColor);
+		}
+
+		public override void Play()
+		{
+			Game.instance.actionChain.Add(this);
+			base.Play();
+		}
+	}
 }

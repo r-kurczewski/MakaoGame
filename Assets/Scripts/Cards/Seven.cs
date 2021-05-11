@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace MakaoGame.Cards
+﻿namespace MakaoGame.Cards
 {
     /// <summary>
     /// Implementuje klasę <see cref="Card"/>

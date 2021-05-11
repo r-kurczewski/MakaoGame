@@ -36,7 +36,7 @@ namespace MakaoGame.GUI
         /// <returns></returns>
         public static ListWindow Create(List<Card> action, string title = default)
         {
-            var window = Instantiate(Resources.Load<ListWindow>("Prefabs/ListWindow"), Game.context.transform);
+            var window = Instantiate(Resources.Load<ListWindow>("Prefabs/ListWindow"), Game.instance.transform);
             window.title.text = title;
             foreach (var card in action)
             {

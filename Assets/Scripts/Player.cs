@@ -1,4 +1,5 @@
 ﻿using MakaoGame.Cards;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -17,6 +18,7 @@ namespace MakaoGame
         [SerializeField] protected Transform WaitTurnLabel;
         [SerializeField] protected Image ActiveTurnIndicator;
 
+        [SerializeField] public bool finishTurn = false;
         [SerializeField] protected int _skipTurn;
         [SerializeField] protected List<Card> cards = new List<Card>();
 
@@ -32,7 +34,7 @@ namespace MakaoGame
         {
             get
             {
-                var pileCard = Game.context.Pile.TopCard;
+                var pileCard = Game.instance.Pile.TopCard;
                 if (pileCard == null) return cards;
                 var type = pileCard.GetType();
                 var color = pileCard.CardColor;
@@ -48,18 +50,23 @@ namespace MakaoGame
         /// <summary>
         /// Liczba tur które gracz musi czekać
         /// </summary>
-        public int SkipTurn { get => _skipTurn; set => _skipTurn = value; }
+        public int SkipTurns { get => _skipTurn; set => _skipTurn = value; }
 
         /// <summary>
         /// Przekazanie karty do ręki gracza
         /// </summary>
         /// <param name="card"></param>
-        public abstract void GiveCard(Card card);
+        public virtual void GiveCard(Card card)
+        {
+            card.transform.SetParent(cardFolder, false);
+            card.transform.localScale = Vector3.one;
+            cards.Add(card);
+        }
 
         /// <summary>
         /// Zleca danemu graczowi wykonanie ruchu
         /// </summary>
-        public abstract void MakeAMove();
+        public abstract IEnumerator Move();
 
         /// <summary>
         /// Zleca graczowi zastosowanie się do akcji
@@ -83,39 +90,40 @@ namespace MakaoGame
         /// <param name="card"></param>
         public void Counter(Card card)
         {
-            Debug.Log($"{this.name} counter {Game.context.actionChain.Last().name} with {card.name}");
+            Debug.Log($"{this.name} counter {Game.instance.actionChain.Last().name} with {card.name}");
             cards.Remove(card);
             card.CounterPlay();
         }
 
-        protected void Wait()
+        protected void SkipAndEndTurn()
         {
-            SkipTurn--;
-            Debug.Log($"{this.name} must wait a turn. ({SkipTurn + 1}->{SkipTurn})");
+            UpdateSkipCounter();
+            finishTurn = true;
+        }
+
+        private void UpdateSkipCounter()
+        {
+            SkipTurns--;
+            Debug.Log($"{this.name} must wait a turn. ({SkipTurns + 1} -> {SkipTurns})");
         }
 
         protected void AcceptAction()
         {
-            // Wywołuje każdy efekt od najnowszego
-            for (int i = Game.context.actionChain.Count - 1; i >= 0; i--)
+            Debug.Log($"{this.name} takes an action." + string.Join(", ", Game.instance.actionChain));
+            for (int i = 0; i < Game.instance.actionChain.Count; i++)
             {
-                var card = Game.context.actionChain[i];
-                card.Effect();
+                Game.instance.actionChain[i].Effect();
             }
-            if (Game.context.actionChain.Count(c => c.GetType() == typeof(Jack) || c.GetType() == typeof(Queen)) == 0)
-            {
-                Game.context.EndPlayerTurn();
-            }
-            Debug.Log($"{this.name} takes an action.");
         }
 
         /// <summary>
         /// Zleca graczowi dobranie karty
         /// </summary>
-        public void DrawACard()
+        public void DrawCardAndEndTurn()
         {
-            var card = Game.context.Deck.DrawCard();
+            var card = Game.instance.Deck.DrawCard();
             GiveCard(card);
+            finishTurn = true;
             Debug.Log($"{this.name} draws {card.name}");
         }
 
@@ -134,11 +142,11 @@ namespace MakaoGame
         /// </summary>
         public void UpdateGUILabels()
         {
-            ActiveTurnIndicator.color = Game.context.CurrentPlayer == this ? Color.green : Color.white;
-            if (SkipTurn > 0)
+            ActiveTurnIndicator.color = Game.instance.CurrentPlayer == this ? Color.green : Color.white;
+            if (SkipTurns > 0)
             {
                 WaitTurnLabel.gameObject.SetActive(true);
-                WaitTurnLabel.GetComponentInChildren<TMP_Text>().text = SkipTurn.ToString();
+                WaitTurnLabel.GetComponentInChildren<TMP_Text>().text = SkipTurns.ToString();
             }
             else
             {

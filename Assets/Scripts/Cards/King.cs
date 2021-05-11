@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using static MakaoGame.CardSuit;
 
 namespace MakaoGame.Cards
 {
@@ -8,63 +6,60 @@ namespace MakaoGame.Cards
     /// Implementuje klasę <see cref="Card"/>
     /// </summary>
     public class King : Card
-    {
-        public override string Label => "K";
+	{
+		public override string Label => "K";
 
-        public override void CounterPlay()
-        {
-            if (CardColor == CardSuit.Pike)
-            {
-                Game.context.Pile.AddToPile(this);
-                Game.context.actionChain.Add(this);
-                Game.context.PassAction(false);
-            }
-            else
-            {
-                base.CounterPlay();
-            }
-        }
+		public override void CounterPlay()
+		{
+			if (CardColor is CardSuit.Pike)
+			{
+				Game.instance.Pile.AddToPile(this);
+				Game.instance.actionChain.Add(this);
+				Game.instance.SetCounterClockwise();
+			}
+			else
+			{
+				base.CounterPlay();
+			}
+		}
 
-        public override void Effect()
-        {
-            switch (CardColor)
-            {
-                case CardSuit.Heart:
-                case CardSuit.Pike:
-                    for (int i = 0; i < 5; i++)
-                    {
-                        Game.context.CurrentPlayer.GiveCard(Game.context.Deck.DrawCard());
-                    }
-                        Game.context.actionChain.Remove(this);
-                    break;
-            }
-        }
+		public override void Effect()
+		{
+			switch (CardColor)
+			{
+				case Heart:
+				case Pike:
+					for (int i = 0; i < 5; i++)
+					{
+						Game.instance.CurrentPlayer.GiveCard(Game.instance.Deck.DrawCard());
+					}
+					Game.instance.actionChain.Remove(this);
+					Game.instance.CurrentPlayer.finishTurn = true;
+					break;
+			}
+		}
 
-        public override bool IsCounterTo(Card card)
-        {
-            if (CardColor == CardSuit.Clover || CardColor == CardSuit.Tile) return false;
-            if (card.GetType() == typeof(King) && (card.CardColor == CardSuit.Heart || card.CardColor == CardSuit.Pike)) return true;
-            else if ((card.GetType() == typeof(Two) || card.GetType() == typeof(Three)) && card.CardColor == CardColor) return true;
-            else return false;
-        }
+		public override bool IsCounterTo(Card card)
+		{
+			if (CardColor is Clover || CardColor is Tile) return false;
+			if (card is King && (card.CardColor is Heart || card.CardColor is Pike)) return true;
+			else if ((card is Two || card is Three) && card.CardColor == CardColor) return true;
+			else return false;
+		}
 
-        public override void Play()
-        {
-            Game.context.Pile.AddToPile(this);
-            if (CardColor == CardSuit.Pike)
-            {
-                Game.context.actionChain.Add(this);
-                Game.context.PassAction(false);
-            }
-            else if (CardColor == CardSuit.Heart)
-            {
-                Game.context.actionChain.Add(this);
-                Game.context.PassAction();
-            }
-            else
-            {
-                Game.context.EndPlayerTurn();
-            }
-        }
-    }
+		public override void Play()
+		{
+			Game.instance.Pile.AddToPile(this);
+			if (CardColor == Pike)
+			{
+				Game.instance.actionChain.Add(this);
+				Game.instance.SetCounterClockwise();
+			}
+			else if (CardColor is Heart)
+			{
+				Game.instance.actionChain.Add(this);
+			}
+			Game.instance.CurrentPlayer.finishTurn = true;
+		}
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using MakaoGame.Cards;
 using MakaoGame.GUI;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,48 +8,37 @@ using UnityEngine;
 namespace MakaoGame.Players
 {
     /// <summary>
-    /// Implementuje klasę <see cref="Player"/>
+    /// Implementuje klasę <see cref="MakaoGame.Player"/>
     /// Klasa odpowiadająca za wykonywanie ruchów gracza.
     /// </summary>
     public class HumanPlayer : Player
     {
-        public override void GiveCard(Card card)
-        {
-            card.transform.SetParent(cardFolder, false);
-            card.transform.localScale = Vector3.one;
-            cards.Add(card);
-        }
-
         public override void ApplyAction()
         {
-            if (SkipTurn > 0)
-            {
-                Wait();
-                Game.context.PassAction();
-                return;
-            }
-            Card toCounter = Game.context.actionChain.LastOrDefault();
-            if (cards.FirstOrDefault(c => c.IsCounterTo(toCounter)))
-            {
-                var actionWindow = ListWindow.Create(Game.context.actionChain, "Czy chcesz skontrować karty:");
+            Card toCounter = Game.instance.actionChain.LastOrDefault();
 
-                // skontruj kartę
+            if (cards.Any(c => c.IsCounterTo(toCounter)))
+            {
+                var actionWindow = ListWindow.Create(Game.instance.actionChain, "Czy chcesz skontrować karty:");
+
+                // potwierdź skontrowanie karty
                 actionWindow.Accept.onClick.AddListener(delegate
                 {
                     var pickWindow = CardPickWindow.Create(cards.Where(c => c.IsCounterTo(toCounter)).ToList(), "Wybierz kartę którą chcesz rzucić:");
                     pickWindow.Accept.onClick.AddListener(delegate
-                    {
-                        Counter(pickWindow.Pick.original);
-                        pickWindow.Close();
-                    });
+                         {
+                             // kontrowanie
+                             Counter(pickWindow.Pick.original);
+                             pickWindow.Close();
+                         });
                     pickWindow.Decline.onClick.AddListener(delegate
-                    {
-                        AcceptAction();
-                        pickWindow.Close();
-                    });
+                         {
+                             // rezygnacja z kontrowania i przyjęcie akcji
+                             AcceptAction();
+                             pickWindow.Close();
+                         });
                     actionWindow.Close();
                 });
-
                 // przyjmij akcję
                 actionWindow.Decline.onClick.AddListener(delegate
                 {
@@ -62,12 +52,23 @@ namespace MakaoGame.Players
             }
         }
 
-        public override void MakeAMove()
+        public override IEnumerator Move()
         {
-            if (SkipTurn > 0)
+            if (SkipTurns > 0)
             {
-                Wait();
-                Game.context.EndPlayerTurn();
+                SkipAndEndTurn();
+            }
+            else if (Game.instance.actionChain.Count > 0)
+            {
+                ApplyAction();
+                if (SkipTurns > 0)
+                {
+                    SkipAndEndTurn();
+                }
+            }
+            while (!finishTurn)
+            {
+                yield return null;
             }
         }
 
@@ -86,12 +87,15 @@ namespace MakaoGame.Players
             var window = AceEffectWindow.Create();
             window.Accept.onClick.AddListener(delegate
             {
+                // zmień kolor
                 card.ChangeColor(window.Pick.color);
-                Game.context.EndPlayerTurn();
+                finishTurn = true;
                 window.Close();
             });
             window.Decline.onClick.AddListener(delegate
             {
+                // nie zmieniaj koloru
+                finishTurn = true;
                 window.Close();
             });
         }
@@ -101,14 +105,16 @@ namespace MakaoGame.Players
             var window = JackRequestWindow.Create();
             window.Accept.onClick.AddListener(delegate
             {
+                // żądaj
                 jack.Request = window.Pick.original.GetType();
-                Game.context.PassAction();
+                finishTurn = true;
                 window.Close();
             });
             window.Decline.onClick.AddListener(delegate
             {
-                Game.context.actionChain.Clear();
-                Game.context.EndPlayerTurn();
+                // nie żądaj
+                Game.instance.actionChain.Clear();
+                finishTurn = true;
                 window.Close();
             });
         }
@@ -122,35 +128,21 @@ namespace MakaoGame.Players
                 var window = JackEffectWindow.Create(cards.Where(c => jack.Request == c.GetType()).ToList());
                 window.Accept.onClick.AddListener(delegate
                 {
-                    Game.context.Pile.AddToPile(window.Pick.original);
-                    cards.Remove(window.Pick.original);
-                    PassJack(jack);
+                    // rzuć kartę danego typu
+                    Card pick = window.Pick.original;
+                    Play(pick);
                     window.Close();
                 });
                 window.Decline.onClick.AddListener(delegate
                 {
-                    DrawACard();
-                    PassJack(jack);
+                    // dobierz kartę
+                    DrawCardAndEndTurn();
                     window.Close();
                 });
             }
             else
             {
-                DrawACard();
-                PassJack(jack);
-            }
-        }
-
-        private void PassJack(Jack jack)
-        {
-            if (jack.ThrowingPlayer == this)
-            {
-                Game.context.actionChain.Clear();
-                Game.context.EndPlayerTurn();
-            }
-            else
-            {
-                Game.context.PassAction();
+                DrawCardAndEndTurn();
             }
         }
     }

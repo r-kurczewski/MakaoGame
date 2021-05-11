@@ -22,7 +22,7 @@ namespace MakaoGame.GUI
         /// <returns></returns>
         public static AceEffectWindow Create()
         {
-            var window = Instantiate(Resources.Load<AceEffectWindow>("Prefabs/AceEffectWindow"), Game.context.transform);
+            var window = Instantiate(Resources.Load<AceEffectWindow>("Prefabs/AceEffectWindow"), Game.instance.transform);
             foreach (CardSuit color in System.Enum.GetValues(typeof(CardSuit)))
             {
                 ColorPicker pick = Card.Create<Ace>(color).gameObject.AddComponent<ColorPicker>();

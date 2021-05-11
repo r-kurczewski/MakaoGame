@@ -25,7 +25,7 @@ namespace MakaoGame.GUI
                 Card.Create<Nine>(color),
                 Card.Create<Ten>(color),
             };
-            var window = Instantiate(Resources.Load<JackRequestWindow>("Prefabs/JackRequestWindow"), Game.context.transform);
+            var window = Instantiate(Resources.Load<JackRequestWindow>("Prefabs/JackRequestWindow"), Game.instance.transform);
             foreach (var card in possibleRequests)
             {
                 CardPicker pick = card.gameObject.AddComponent<CardPicker>();
