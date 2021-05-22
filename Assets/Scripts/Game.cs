@@ -36,7 +36,7 @@ namespace MakaoGame
 		/// <summary>
 		/// Indeks aktualnego gracza 
 		/// </summary>
-		public int CurrentPlayerId { get { return _currentPlayerId; } private set { _currentPlayerId = (4 + value) % 4; } }
+		private int CurrentPlayerId { get { return _currentPlayerId; } set { _currentPlayerId = (4 + value) % 4; } }
 
 		/// <summary>
 		/// Lista graczy w grze
@@ -90,8 +90,6 @@ namespace MakaoGame
 		{
 			get
 			{
-				while (Players[CurrentPlayerId] == null)
-					CurrentPlayerId++;
 				return Players[CurrentPlayerId];
 			}
 		}
@@ -103,22 +101,20 @@ namespace MakaoGame
 
 		private void PreviousPlayerTurn()
 		{
-			CurrentPlayer.finishTurn = false;
-			do
+			if (CurrentPlayer != null)
 			{
-				CurrentPlayerId--;
+				CurrentPlayer.finishTurn = false;
 			}
-			while (Players[CurrentPlayerId] == null);
+			CurrentPlayerId--;
 		}
 
 		private void NextPlayerTurn()
 		{
-			CurrentPlayer.finishTurn = false;
-			do
-			{
-				CurrentPlayerId++;
-			}
-			while (Players[CurrentPlayerId] == null);
+			if(CurrentPlayer != null)
+            {
+				CurrentPlayer.finishTurn = false;
+            } 
+			CurrentPlayerId++;
 		}
 
 		void Start()
@@ -130,16 +126,16 @@ namespace MakaoGame
 			Deck.Create();
 			Deck.Shuffle();
 
-			// Rozdanie kart graczom
-			foreach (var player in Players)
-			{
-				for (int i = 0; i < 5; i++)
-				{
-					Card card = Deck.DrawCard(playSound: false);
-					player.GiveCard(card);
-				}
-			}
-			UpdateGUILabels();
+            // Rozdanie kart graczom
+            foreach (var player in Players)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Card card = Deck.DrawCard(playSound: false);
+                    player.GiveCard(card);
+                }
+            }
+            UpdateGUILabels();
 			StartCoroutine(IManageTurns());
 		}
 
@@ -150,6 +146,12 @@ namespace MakaoGame
 		{
 			while (true)
 			{
+				if (CurrentPlayer is null)
+				{
+					NextPlayerTurn();
+					continue;
+				}
+				UpdateGUILabels();
 				StartCoroutine(CurrentPlayer.Move());
 				yield return new WaitUntil(() => CurrentPlayer.finishTurn);
 				CheckWinningCondition();
@@ -160,7 +162,6 @@ namespace MakaoGame
 					clockwise = true;
 				}
 				else NextPlayerTurn();
-				UpdateGUILabels();
 			}
 		}
 

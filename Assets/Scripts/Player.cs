@@ -110,9 +110,10 @@ namespace MakaoGame
         protected void AcceptAction()
         {
             Debug.Log($"{this.name} takes an action." + string.Join(", ", Game.instance.actionChain));
-            for (int i = 0; i < Game.instance.actionChain.Count; i++)
+            List<Card> actionCardsCopy = Game.instance.actionChain.ToList();
+            foreach (var card in actionCardsCopy)
             {
-                Game.instance.actionChain[i].Effect();
+                card.Effect();
             }
         }
 
