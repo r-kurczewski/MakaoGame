@@ -652,12 +652,6 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/UnityProjects/MakaoGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/UnityProjects/MakaoGame/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/UnityProjects/MakaoGame/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/UnityProjects/MakaoGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
