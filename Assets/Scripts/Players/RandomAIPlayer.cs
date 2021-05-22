@@ -19,7 +19,7 @@ namespace MakaoGame.Players
         public override void GiveCard(Card card)
         {
             base.GiveCard(card);
-            //card.Hide(); // Debug
+            card.Hide(); // Debug
         }
 
         public override IEnumerator Move()
